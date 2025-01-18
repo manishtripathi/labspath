@@ -1,0 +1,20 @@
+@import url(../../color.css);
+.login {
+    background: #fff;
+    width: 600px;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    h4{
+        color: var(--login-text-color);
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+    }
+    h3{
+        color: var(--account-type-color);
+        font-size: 1.12rem;
+        font-weight: 600;
+    }
+
+}
