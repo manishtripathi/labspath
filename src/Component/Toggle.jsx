@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../redux/toggleSlice";
+import CustomForm from "./Forms/CustomForm";
+import { loginFields } from "./formFields";
 
 const Toggle = () => {
     const dispatch = useDispatch();
@@ -16,6 +18,10 @@ const Toggle = () => {
         console.log("Dispatching value:", value); // Debug the value
         dispatch(setActive(value));
     };
+
+    function handleSubmit(data){
+        console.log("form submitted successfully",data);
+    }
 
     return (
         <div className="login-toggle">
@@ -46,6 +52,7 @@ const Toggle = () => {
             >
                 Doctor
             </button>
+            <CustomForm fields = {loginFields} onSubmit={handleSubmit}/>
         </div>
     );
 };
