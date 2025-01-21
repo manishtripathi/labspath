@@ -1,0 +1,21 @@
+import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "./Pages/useraccount/Dashboard";
+import Login from "./Pages/useraccount/Login";
+
+
+const Myroute = createBrowserRouter([
+    {
+        path: '/',
+        element: <Login/>,
+        children: [
+            {
+              path: "dashboard",
+              element: <h1 className="text-3xl font-bold underline bg-slate-600">Dashboard</h1>,
+            },
+        ],
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard/>
+    }
+])
