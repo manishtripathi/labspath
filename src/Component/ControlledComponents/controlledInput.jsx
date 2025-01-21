@@ -5,50 +5,55 @@ const ControlledInput = React.memo(
   ({
     type = "text",
     label = "Label",
-    value,
-    rules = {}, 
-    styles = {}, 
+    value = "",
+    rules = {},
+    styles = {},
     onChange = () => {},
+    error, // Accept error passed from parent
     ...props
   }) => {
-    const [error, setError] = useState();
+    const [localError, setLocalError] = useState();
 
-    const handleComponentChange = useCallback((e)=>{
-        debugger
-        onChange(e,error?true:false);
-    },[])
+    const handleComponentChange = useCallback(
+      (e) => {
+        const { value } = e.target;
+        const isInvalid = validate(rules, value, setLocalError);
+        onChange(e, isInvalid);
+      },
+      [rules, onChange]
+    );
 
-    const handleBlur = useCallback((e)=>{
-        debugger
-        const inValid=validate(rules, value, setError);
-        onChange(e,inValid?true:false);
-    },[value])
-    console.log(label,value)
+    const handleBlur = useCallback(
+      (e) => {
+        const isInvalid = validate(rules, e.target.value, setLocalError);
+        onChange(e, isInvalid);
+      },
+      [rules, onChange]
+    );
+
+    const displayError = localError || error;
+    console.log(displayError, localError);
+
     return (
       <div style={styles.wrapper} className={styles.className || ""}>
-        {/* Label */}
         {label && (
           <div style={styles.label}>
             <label>{label}</label>
           </div>
         )}
-
-        {/* Input */}
         <div>
           <input
             type={type}
             value={value}
             onChange={handleComponentChange}
-            style={styles.input}
             onBlur={handleBlur}
+            style={styles.input}
             {...props}
           />
         </div>
-
-        {/* Error Message */}
-        {error && (
+        {displayError && (
           <div style={styles.error} className="error-message">
-            <small style={{ color: "red" }}>{error}</small>
+            <small style={{ color: "red" }}>{displayError}</small>
           </div>
         )}
       </div>

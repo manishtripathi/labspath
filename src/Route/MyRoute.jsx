@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import Dashboard from "./Pages/useraccount/Dashboard";
-import Login from "./Pages/useraccount/Login";
+// import Dashboard from "./Pages/useraccount/Dashboard";
+import Login from "../Pages/useraccount/Login";
+import Dashboard from "../Pages/useraccount/Dashboard";
 
 
 const Myroute = createBrowserRouter([
@@ -19,3 +20,5 @@ const Myroute = createBrowserRouter([
         element: <Dashboard/>
     }
 ])
+
+export default Myroute

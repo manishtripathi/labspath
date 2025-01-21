@@ -14,9 +14,9 @@ const Dashboard = ()=> {
           <h1> Dashbaord </h1>
           <p>Welcome to LabSmart</p>
           <div className="cards">
-            <TotalCard title="Total Income Dec 2024" value={`$${dashboardData.totalIncome}`} />
-            <TotalCard title="Total Collection Charges Dec" value={`$${dashboardData.totalCollectionCharges}`} />
-            <TotalCard title="Expenses In Dec" value={`$${dashboardData.expenses}`} />
+            <TotalCard title="Total Income Dec 2024" value={`$${dashboardData?.totalIncome}`} />
+            <TotalCard title="Total Collection Charges Dec" value={`$${dashboardData?.totalCollectionCharges}`} />
+            <TotalCard title="Expenses In Dec" value={`$${dashboardData?.expenses}`} />
           </div>
 
           <div className="charts">

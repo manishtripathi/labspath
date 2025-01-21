@@ -17,7 +17,7 @@ const initialState = {
             visitingDate: '2nd Jun 2023',
             status: 'Pending'
         }
-    ];
+    ]
 };
 
 const dashboardSlice = createSlice({

@@ -1,5 +1,4 @@
 export const validate = (rules = [], value, setError) => {
-    debugger
     for (let rule of rules) {
 
         if (rule?.required && value?.length === 0) {

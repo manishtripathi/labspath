@@ -15,3 +15,4 @@ export const loginFields = [
          {minLength:3,message:"Minimum required length is 3"}
          ]}
 ]
+

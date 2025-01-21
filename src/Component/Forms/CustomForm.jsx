@@ -1,6 +1,5 @@
 import React, { useCallback, useReducer, useState } from "react";
 import ControlledInput from "../ControlledComponents/controlledInput";
-import { loginFields } from "../formFields";
 
 const formReducer = (state, action) => {
   switch (action.type) {
@@ -14,54 +13,69 @@ const formReducer = (state, action) => {
   }
 };
 
-const CustomForm = ({
-    fields=[],
-    onSubmit=()=>{},
-    selectOptionFields=[]
-}) => {
-  // Initialize state with empty values for each field
-  const initialState = loginFields.reduce((acc, field) => {
-    acc[field.name] = "";
+const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
+  // Initialize state dynamically based on provided fields
+  const initialState = fields.reduce((acc, field) => {
+    acc[field.name] = ""; // Default value for each field
     return acc;
   }, {});
 
   const [formState, dispatch] = useReducer(formReducer, initialState);
-  const [errorState, setErrorState] = useState(false);
+  const [errorState, setErrorState] = useState({}); // Track errors for each field
 
-  const handleChange = useCallback((e,error) => {
-    const { name, value } = e.target;
-    dispatch({ type: "UPDATE_FIELD", field: name, value });
-    if(error && !errorState){
-        setErrorState(true);
-    }
-    else if (!error && errorState){
-        setErrorState(false);
-    }
-  },[errorState])
+  const handleChange = useCallback(
+    (e, hasError) => {
+      const { name, value } = e.target;
+      dispatch({ type: "UPDATE_FIELD", field: name, value });
+
+      setErrorState((prevErrors) => ({
+        ...prevErrors,
+        [name]: hasError ? "This field is required" : undefined,
+      }));
+    },
+    []
+  );
 
   const handleSubmit = (e) => {
-    debugger
     e.preventDefault();
-    if(errorState)
-    return console.log("please fix errors before submitting to the form");
+
+    const newErrorState = {};
+    let hasError = false;
+
+    fields.forEach((field) => {
+      const value = formState[field.name]?.trim();
+      if (!value) {
+        newErrorState[field.name] = "This field is required";
+        hasError = true;
+      }
+    });
+
+    setErrorState(newErrorState);
+
+    if (hasError) {
+      console.log("Please fix errors before submitting the form.");
+      return;
+    }
+
     onSubmit(formState);
-    // Add validation or API call logic here
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {fields.map((field) => (
         <ControlledInput
-          key={field?.name}
-          label={field?.label}
-          type={field?.type}
-          name={field?.name}
-          value={formState[field?.name]}
-          rules={field?.rules}
+          key={field.name}
+          label={field.label}
+          type={field.type}
+          name={field.name}
+          value={formState[field.name]}
+          rules={field.rules}
           onChange={handleChange}
+          error={errorState[field.name]}
+          required = {field.required} // Pass error state to the input
         />
       ))}
-      <button type="submit">Login</button>
+      <button type="submit">Submit</button>
     </form>
   );
 };
