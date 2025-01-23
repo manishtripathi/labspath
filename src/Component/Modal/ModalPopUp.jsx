@@ -4,7 +4,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null; // Render nothing if the modal is closed
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-scroll">
       {/* Modal Container */}
       <div className="relative w-full max-w-md bg-white rounded-lg shadow-lg p-6 animate-fadeIn">
         {/* Close Button */}

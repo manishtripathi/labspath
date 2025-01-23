@@ -1,64 +1,68 @@
-import React, { useCallback, useState } from "react";
+import React, { useState, useCallback } from "react";
 import { validate } from "./validate";
+import "./controlled.css"
 
-const ControlledInput = React.memo(
-  ({
-    type = "text",
-    label = "Label",
-    value = "",
-    rules = {},
-    styles = {},
-    onChange = () => {},
-    error, // Accept error passed from parent
-    ...props
-  }) => {
-    const [localError, setLocalError] = useState();
+const ControlledInput = ({
+  type = "text",
+  label,
+  value = "",
+  rules,
+  styles = {},
+  className = "",
+  onChange = () => {},
+  onBlur = () => {},
+  error, // External error passed from parent
+  ...props
+}) => {
+  const [localError, setLocalError] = useState("");
 
-    const handleComponentChange = useCallback(
-      (e) => {
-        const { value } = e.target;
-        const isInvalid = validate(rules, value, setLocalError);
-        onChange(e, isInvalid);
-      },
-      [rules, onChange]
-    );
+  // Handle change and validate input
+  const handleChange = useCallback(
+    (e) => {
+      const { value } = e.target;
+      const isInvalid = validate(rules, value, setLocalError);
+      onChange(e, isInvalid); // Pass the value and validation status to the parent
+    },
+    [rules, onChange]
+  );
 
-    const handleBlur = useCallback(
-      (e) => {
-        const isInvalid = validate(rules, e.target.value, setLocalError);
-        onChange(e, isInvalid);
-      },
-      [rules, onChange]
-    );
+  // Handle blur to validate input
+  const handleBlur = useCallback(
+    (e) => {
+      const { value } = e.target;
+      const isInvalid = rules ? validate(rules, value, setLocalError): true;
+      onBlur(value, isInvalid); // Trigger onBlur callback
+    },
+    [rules, onBlur]
+  );
 
-    const displayError = localError || error;
-    console.log(displayError, localError);
+  const displayError = localError || error;
 
-    return (
-      <div style={styles.wrapper} className={styles.className || ""}>
-        {label && (
-          <div style={styles.label}>
-            <label>{label}</label>
-          </div>
-        )}
-        <div>
-          <input
-            type={type}
-            value={value}
-            onChange={handleComponentChange}
-            onBlur={handleBlur}
-            style={styles.input}
-            {...props}
-          />
-        </div>
-        {displayError && (
-          <div style={styles.error} className="error-message">
-            <small style={{ color: "red" }}>{displayError}</small>
-          </div>
-        )}
+  return (
+    <div className={`controlled-input-wrapper ${className}`} style={styles.wrapper}>
+      {label && (
+        <label style={styles.label} className="controlled-input-label">
+          {label}
+        </label>
+      )}
+      <div>
+        <input
+          type={type}
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          style={styles.input}
+          className={`controlled-input ${displayError ? "error" : ""}`}
+          {...props}
+        />
       </div>
-    );
-  }
-);
+      {displayError && (
+        <div style={styles.error} className="controlled-input-error">
+          <small style={{ color: "red" }}>{displayError}</small>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default ControlledInput;
+export default React.memo(ControlledInput);

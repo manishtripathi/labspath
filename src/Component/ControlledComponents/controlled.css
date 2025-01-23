@@ -1,0 +1,33 @@
+.controlled-input-wrapper {
+  margin-bottom: 1rem;
+}
+
+.controlled-input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.controlled-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.controlled-input:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+.controlled-input.error {
+  border-color: red;
+}
+
+.controlled-input-error {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: red;
+}

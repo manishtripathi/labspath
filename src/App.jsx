@@ -5,7 +5,7 @@ import CommonPage from './Common'
 import Myroute from './Route/MyRoute'
 import { Route, Routes } from 'react-router-dom'
 import Login from './Pages/useraccount/Login'
-import Dashboard from './Pages/useraccount/Dashboard2'
+import Dashboard from './libs/Dashboard/dashboard'
 
 function App() {
   const [count, setCount] = useState(0)
