@@ -1,27 +1,18 @@
 import React, { useCallback, useReducer, useState } from "react";
 import ControlledInput from "../ControlledComponents/controlledInput";
+import "./form.css";
+import ControlledPassword from "../ControlledComponents/controlledPassword";
+import { formReducer } from "../commonService";
 
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case "UPDATE_FIELD":
-      return {
-        ...state,
-        [action.field]: action.value,
-      };
-    default:
-      return state;
-  }
-};
 
 const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
-  // Initialize state dynamically based on provided fields
   const initialState = fields.reduce((acc, field) => {
-    acc[field.name] = ""; // Default value for each field
+    acc[field.name] = "";
     return acc;
   }, {});
 
   const [formState, dispatch] = useReducer(formReducer, initialState);
-  const [errorState, setErrorState] = useState({}); // Track errors for each field
+  const [errorState, setErrorState] = useState({});
 
   const handleChange = useCallback(
     (e, hasError) => {
@@ -61,8 +52,24 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {fields.map((field) => (
+    <form onSubmit={handleSubmit} className="custom-form" style={{ maxWidth: "400px", margin: "auto" }}>
+      {fields.map((field) => {
+         
+         if(field?.type?.toLowerCase() === ("password" || "pwd")){
+        return (
+          <ControlledPassword
+          key={field.name}
+          label={field.label}
+          name={field.name}
+          value={formState[field.name]}
+          rules={field.rules}
+          onChange={handleChange}
+          error={errorState[field.name]}
+          required={field.required}
+        />
+        )
+      } else{
+        return (
         <ControlledInput
           key={field.name}
           label={field.label}
@@ -72,10 +79,33 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
           rules={field.rules}
           onChange={handleChange}
           error={errorState[field.name]}
-          required = {field.required} // Pass error state to the input
+          required={field.required}
         />
-      ))}
-      <button type="submit">Submit</button>
+      )}
+      })}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <label style={{ display: "flex", alignItems: "center" }}>
+          <input type="checkbox" style={{ marginRight: "0.5rem" }} />
+          Remember me
+        </label>
+        <a href="/forgot-password" style={{ color: "#6C63FF", textDecoration: "none" }}>
+          Forgot Password?
+        </a>
+      </div>
+      <button
+        type="submit"
+        style={{
+          width: "100%",
+          backgroundColor: "#6C63FF",
+          color: "#fff",
+          padding: "0.8rem",
+          borderRadius: "8px",
+          border: "none",
+          fontWeight: "bold",
+        }}
+      >
+        Sign In
+      </button>
     </form>
   );
 };

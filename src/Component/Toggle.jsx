@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setActive } from "../redux/toggleSlice";
 import CustomForm from "./Forms/CustomForm";
 import { loginFields } from "./formFields";
+import { loginAsAdmin, loginAsDoctor, loginAsLabCenter } from "../redux/slices/authSlice";
+import { handleLoginAsAdmin, handleLoginAsDoctor, handleLoginAsSuperAdmin } from "./commonService";
+import { useNavigate } from "react-router-dom";
 
 const Toggle = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [activeToggle , setActiveToggle] = useState("Lab Center");
 
     // Select the `active` state from Redux
     const active = useSelector((state) => {
@@ -16,19 +21,28 @@ const Toggle = () => {
     // Dispatch the action to update state
     const handleToggle = (value) => {
         console.log("Dispatching value:", value); // Debug the value
-        dispatch(setActive(value));
+        // dispatch(setActive(value));
+        setActiveToggle(value)
     };
 
     function handleSubmit(data){
         console.log("form submitted successfully",data);
+        if(activeToggle === "Lab Center"){
+            handleLoginAsSuperAdmin(data, dispatch, navigate)
+        }   else if(activeToggle === "Doctor"){
+            handleLoginAsDoctor(data, dispatch, navigate);
+        }   else if(activeToggle === "Admin"){
+            handleLoginAsAdmin(data, dispatch, navigate);
+        }
+        
     }
 
     return (
         <div className="login-toggle">
             <button
                 style={{
-                    backgroundColor: active === "Lab Center" ? "purple" : "white",
-                    color: active === "Lab Center" ? "white" : "black",
+                    backgroundColor: activeToggle === "Lab Center" ? "purple" : "white",
+                    color: activeToggle === "Lab Center" ? "white" : "black",
                     border: "1px solid #ccc",
                     padding: "10px 20px",
                     cursor: "pointer",
@@ -41,8 +55,8 @@ const Toggle = () => {
 
             <button
                 style={{
-                    backgroundColor: active === "Doctor" ? "purple" : "white",
-                    color: active === "Doctor" ? "white" : "black",
+                    backgroundColor: activeToggle === "Doctor" ? "purple" : "white",
+                    color: activeToggle === "Doctor" ? "white" : "black",
                     border: "1px solid #ccc",
                     padding: "10px 20px",
                     cursor: "pointer",
@@ -51,6 +65,20 @@ const Toggle = () => {
                 onClick={() => handleToggle("Doctor")}
             >
                 Doctor
+            </button>
+
+            <button
+                style={{
+                    backgroundColor: activeToggle === "Admin" ? "purple" : "white",
+                    color: activeToggle === "Admin" ? "white" : "black",
+                    border: "1px solid #ccc",
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                }}
+                onClick={() => handleToggle("Admin")}
+            >
+                Admin
             </button>
             <CustomForm fields = {loginFields} onSubmit={handleSubmit}/>
         </div>

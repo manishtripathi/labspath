@@ -1,17 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MenuItem from './MenuItem';
 import Modal from '../../../Component/Modal/ModalPopUp';
 import AddNewCaseModal from '../../../Component/Modal/AddNewCase/AddNewCase';
+import { useSelector } from 'react-redux';
+import { getFormModal } from '../../../Common';
+import { AddDoctor } from '../../../Component/formFields';
+import FormModal from '../../../Component/Modal/FormModal';
+import { handleAddDoctor } from '../../../Component/commonService';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [activeMenu, setActiveMenu] = useState('');
   const [addNewCase, setAddNewCase] = useState(false);
-
+  const [displayModal, setDisplayModal] = useState(false);
+  const [activeFields, setActiveFields] = useState(null);
+  const [activeModal, setActiveModal] = useState(null);
+  const {user} = useSelector((state)=>state.auth);
+  const navigate= useNavigate();
+  console.log(user);
   const toggleMenu = (menu) => {
     setActiveMenu(activeMenu === menu ? '' : menu);
   };
+  const handleSubmit = (data) =>{
+    console.log(data);
+    if(activeModal === "doctor"){
+      handleAddDoctor(data, setDisplayModal,navigate);
+    }
+  }
+
+  const handleFormModalSection = (param) =>{
+    setDisplayModal(true);
+    if(param === "doctor") {
+      setActiveFields(AddDoctor);
+      setActiveModal(param);
+    } else if (param === ""){
+
+    }
+  }
+
+  useEffect(()=>{
+    console.log(activeFields);
+  },[activeFields])
 
   return (
+    <>
+    {(displayModal && activeFields?.length>0) && <FormModal fields ={activeFields} onSubmit={handleSubmit} showModal = {displayModal} onClose = {()=>setDisplayModal(false)}/>}
     <div className="w-64 bg-gray-100 h-screen shadow-lg">
       <AddNewCaseModal isOpen={addNewCase} onClose={() => setAddNewCase(false)} >
       </AddNewCaseModal>
@@ -41,40 +74,50 @@ const Sidebar = () => {
           title="Business"
           isActive={activeMenu === 'Business'}
           toggleMenu={() => toggleMenu('Business')}
-          subMenu={['Overview', 'Reports', 'Analytics']}
+          subMenu={[{label:'Overview', actions:{}}, {label:'Reports', actions:{}}, {label:'Analytics', actions:{}}]}
         />
         <MenuItem
           title="Cases"
           isActive={activeMenu === 'Cases'}
           toggleMenu={() => toggleMenu('Cases')}
-          subMenu={['Open Cases', 'Closed Cases', 'Archived Cases']}
+          subMenu={[{label:'Open Cases', actions:{}}, {label:'Closed Cases', actions:{}}, {label:'Archived Cases', actions:{}}]}
         />
         <MenuItem
           title="Lab"
           isActive={activeMenu === 'Lab'}
           toggleMenu={() => toggleMenu('Lab')}
-          subMenu={['Tests', 'Schedules', 'Technicians']}
+          subMenu={[{label:'Tests', actions:{}}, {label:'Schedules', actions:{}}, {label:'Technicians', actions:{}}]}
         />
-        <MenuItem
+        {/* <MenuItem
           title="USG"
           isActive={activeMenu === 'USG'}
           toggleMenu={() => toggleMenu('USG')}
           subMenu={['Reports', 'Diagnostics']}
-        />
+        /> */}
         <MenuItem
           title="Digital X-Ray"
           isActive={activeMenu === 'Digital X-Ray'}
           toggleMenu={() => toggleMenu('Digital X-Ray')}
-          subMenu={['Images', 'Radiologists']}
+          subMenu={[{label:'Images', actions:{}}, {label:'Radiologists', actions:{}}]}
         />
+
         <MenuItem
           title="Manage"
           isActive={activeMenu === 'Manage'}
           toggleMenu={() => toggleMenu('Manage')}
-          subMenu={['Users', 'Settings', 'Permissions']}
+          subMenu={[{label:'Add Doctor', actions:()=>handleFormModalSection("doctor")}, {label:'All Doctor', actions:{}}, {label:'Permissions', actions:{}}]}
         />
+        
+        {user?.role === "superadmin" && 
+        <MenuItem
+        title={"Super Admin"}
+        isActive={activeMenu === "Super Admin"}
+        toggleMenu={()=>toggleMenu("Super Admin")}
+        subMenu={[{label:"Add Center", actions:{}}, {label:"Add Admin", actions:{}}, {label:"All Centers", actions:{}} , {label:"All Admin", actions:{}}]}/>
+        }
       </div>
     </div>
+    </>
   );
 };
 

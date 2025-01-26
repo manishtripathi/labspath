@@ -1,0 +1,19 @@
+.controlled-input-wrapper {
+  width: 100%;
+}
+
+.controlled-input {
+  font-size: 1rem;
+}
+
+.controlled-input.error {
+  border-color: red;
+}
+
+.custom-form {
+  font-family: Arial, sans-serif;
+}
+
+.custom-form button:hover {
+  background-color: #5a55ff;
+}

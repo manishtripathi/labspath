@@ -1,37 +1,34 @@
 import React, { useState, useCallback } from "react";
 import { validate } from "./validate";
-import "./controlled.css"
+import "./controlled.css";
 
 const ControlledInput = ({
   type = "text",
   label,
   value = "",
   rules,
-  styles = {},
   className = "",
   onChange = () => {},
   onBlur = () => {},
-  error, // External error passed from parent
+  error,
   ...props
 }) => {
   const [localError, setLocalError] = useState("");
 
-  // Handle change and validate input
   const handleChange = useCallback(
     (e) => {
       const { value } = e.target;
       const isInvalid = validate(rules, value, setLocalError);
-      onChange(e, isInvalid); // Pass the value and validation status to the parent
+      onChange(e, isInvalid);
     },
     [rules, onChange]
   );
 
-  // Handle blur to validate input
   const handleBlur = useCallback(
     (e) => {
       const { value } = e.target;
-      const isInvalid = rules ? validate(rules, value, setLocalError): true;
-      onBlur(value, isInvalid); // Trigger onBlur callback
+      const isInvalid = rules ? validate(rules, value, setLocalError) : true;
+      onBlur(value, isInvalid);
     },
     [rules, onBlur]
   );
@@ -39,26 +36,24 @@ const ControlledInput = ({
   const displayError = localError || error;
 
   return (
-    <div className={`controlled-input-wrapper ${className}`} style={styles.wrapper}>
+    <div className={`controlled-input-wrapper ${className}`} >
       {label && (
-        <label style={styles.label} className="controlled-input-label">
+        <label className="controlled-input-label" >
           {label}
         </label>
       )}
-      <div>
-        <input
-          type={type}
-          value={value}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          style={styles.input}
-          className={`controlled-input ${displayError ? "error" : ""}`}
-          {...props}
-        />
-      </div>
+      <input
+        type={type}
+        value={value}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        className={`controlled-input ${displayError ? "error" : ""}`}
+        
+        {...props}
+      />
       {displayError && (
-        <div style={styles.error} className="controlled-input-error">
-          <small style={{ color: "red" }}>{displayError}</small>
+        <div className="controlled-input-error" >
+          {displayError}
         </div>
       )}
     </div>
