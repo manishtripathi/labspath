@@ -58,10 +58,14 @@ const formReducer = (state, action) => {
 
 // Add Doctor
 
-export const handleAddDoctor = async(data, setDisplayModal, navigate)=>{
+export const handleAddDoctor = async(data, setDisplayModal, navigate,token)=>{
     console.log("data for adding doctor", data);
     debugger
-    const res = await axios.post(`${BASE_URL}/api/add-doctor`,data);
+    const res = await axios.post(`${BASE_URL}/api/add-doctor`,data,{
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+    });
     console.log(res)
     if(res?.status >=400){
         setDisplayModal(false)

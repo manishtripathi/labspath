@@ -4,7 +4,7 @@ import Modal from '../../../Component/Modal/ModalPopUp';
 import AddNewCaseModal from '../../../Component/Modal/AddNewCase/AddNewCase';
 import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
-import { AddDoctor } from '../../../Component/formFields';
+import { AddAdminFields, AddDoctor, CenterFields } from '../../../Component/formFields';
 import FormModal from '../../../Component/Modal/FormModal';
 import { handleAddDoctor } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [activeFields, setActiveFields] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
-  const {user} = useSelector((state)=>state.auth);
+  const {user,token} = useSelector((state)=>state.auth);
   const navigate= useNavigate();
   console.log(user);
   const toggleMenu = (menu) => {
@@ -24,7 +24,7 @@ const Sidebar = () => {
   const handleSubmit = (data) =>{
     console.log(data);
     if(activeModal === "doctor"){
-      handleAddDoctor(data, setDisplayModal,navigate);
+      handleAddDoctor(data, setDisplayModal,navigate,token);
     }
   }
 
@@ -33,14 +33,20 @@ const Sidebar = () => {
     if(param === "doctor") {
       setActiveFields(AddDoctor);
       setActiveModal(param);
-    } else if (param === ""){
-
+    } else if (param === "center"){
+      setActiveFields(CenterFields);
+      setActiveModal(param)
+    } else if(param === "admin"){
+      setActiveFields(AddAdminFields);
+      setActiveModal(param);
     }
   }
 
-  useEffect(()=>{
-    console.log(activeFields);
-  },[activeFields])
+
+  const handleListSelect =(param)=>{
+    navigate(`/list/${param}`)
+  }
+
 
   return (
     <>
@@ -105,7 +111,9 @@ const Sidebar = () => {
           title="Manage"
           isActive={activeMenu === 'Manage'}
           toggleMenu={() => toggleMenu('Manage')}
-          subMenu={[{label:'Add Doctor', actions:()=>handleFormModalSection("doctor")}, {label:'All Doctor', actions:{}}, {label:'Permissions', actions:{}}]}
+          subMenu={[{label:'Add Doctor', actions:()=>handleFormModalSection("doctor")}, 
+          {label:'All Doctor', actions:()=>handleListSelect("doctor")}, 
+          {label:'Permissions', actions:{}}]}
         />
         
         {user?.role === "superadmin" && 
@@ -113,7 +121,11 @@ const Sidebar = () => {
         title={"Super Admin"}
         isActive={activeMenu === "Super Admin"}
         toggleMenu={()=>toggleMenu("Super Admin")}
-        subMenu={[{label:"Add Center", actions:{}}, {label:"Add Admin", actions:{}}, {label:"All Centers", actions:{}} , {label:"All Admin", actions:{}}]}/>
+        subMenu={[
+        {label:"Add Center", actions:()=>handleFormModalSection("center")}, 
+        {label:"Add Admin", actions:()=>handleFormModalSection("admin")}, 
+        {label:"All Centers", actions:()=>handleListSelect("centers")} , 
+        {label:"All Admin", actions:()=>handleListSelect("admin")}]}/>
         }
       </div>
     </div>

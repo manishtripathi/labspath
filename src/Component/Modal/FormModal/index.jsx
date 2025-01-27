@@ -1,12 +1,13 @@
-import React, { useCallback, useReducer, useState } from 'react'
+import React, { useCallback, useEffect, useReducer, useState } from 'react'
 import Modal from '../ModalPopUp'
 import Select from 'react-select'
 import ControlledInput from '../../ControlledComponents/controlledInput'
 import ControlledSelect from '../../ControlledComponents/controlledSelect'
 import { formReducer } from '../../commonService'
 import ControlledPassword from '../../ControlledComponents/controlledPassword'
+import ControlledInputFile from '../../ControlledComponents/controlledInputFile'
 
-const FormModal = ({fields, onSubmit, showModal, onClose}) => {
+const FormModal = ({fields, onSubmit, showModal, onClose,token}) => {
     console.log("fields at formModal-->", fields)
 
     const initialState = fields.reduce((acc, field) => {
@@ -30,6 +31,22 @@ const FormModal = ({fields, onSubmit, showModal, onClose}) => {
         },
         []
       );
+
+
+      const handleFieldChange = useCallback((e, hasError) => {
+    const { name, files } = e.target;
+
+    if (files && files.length > 0) {
+        const value = files[0]; // Get the first uploaded file
+        dispatch({ type: "UPDATE_FIELD", field: name, value }); // Update the state
+    }
+
+    setErrorState((prevErrors) => ({
+        ...prevErrors,
+        [name]: hasError ? "This field is required" : undefined,
+    }));
+}, []);
+
 
       const handleSelectChange = useCallback(
         (selectedOption, hasError, name) => {
@@ -68,6 +85,10 @@ const FormModal = ({fields, onSubmit, showModal, onClose}) => {
     
         onSubmit(formState);
       };
+
+      useEffect(()=>{
+        console.log(formState);
+      },[formState])
 
   return (
     <Modal isOpen={showModal} onClose={onClose}>
@@ -112,7 +133,22 @@ const FormModal = ({fields, onSubmit, showModal, onClose}) => {
                         />
                         </div>
                     )
-                }
+                } else if(field?.type === "logo"){
+                    return (
+                        <div className='lg:w-1/3 sm:w-1/2 w-full min-w-72'>
+                        <ControlledInputFile
+                        name={field?.name}
+                        // value={formState?.[field.name]}
+                        required={field?.required}
+                        onChange={handleFieldChange}
+                        label = {field.label}
+                        error={errorState[field.name]}
+                        rules = {field?.rules}
+                        {...field?.props}
+                        />
+                        </div>
+                    )
+                } 
                 else{
                     return (
                         <div className='lg:w-1/3 sm:w-1/2 w-full min-w-72'>
