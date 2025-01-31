@@ -38,21 +38,21 @@ const TableWithPagination = ({ data, rowsPerPage = 5, dataRowHeadingList, action
           </tr>
         </thead>
         <tbody>
-          {getPaginatedData().map((item) => (
+          {getPaginatedData().map((item,index) => (
             <tr
-              key={item.id}
-              className={item.id % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+              key={item._id}
+              className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
               {Object.values(item).map((value, index) => (
                 <td key={index} className="p-3 border-b border-gray-200">{value}</td>
               ))}
               <td className="p-3 border-b border-gray-200 relative">
                 <button
                   className="flex items-center text-gray-600 bg-gray-200 px-2 py-1 rounded-lg shadow hover:bg-gray-300"
-                  onClick={() => handleActionClick(item.id)}
+                  onClick={() => handleActionClick(item._id)}
                 >
                   <FaGripVertical />
                 </button>
-                {activeRow === item.id && (
+                {activeRow === item._id && (
                   <div className="absolute z-10 bg-white shadow-lg rounded-lg mt-2 p-2">
                     {actions(item)}
                   </div>

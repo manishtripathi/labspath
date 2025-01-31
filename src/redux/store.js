@@ -18,6 +18,8 @@ import storage from "redux-persist/lib/storage"; // Uses localStorage by default
 // import {thunk} from "redux-thunk";
 
 import authReducer from "./slices/authSlice";
+import doctorReducer from "./slices/doctorSlice";
+
 
 const persistConfig = {
   key: "root",
@@ -27,6 +29,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  doctor:doctorReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -36,12 +36,12 @@ export const AddDoctor=[
 
 
 export const CenterFields = [
-          {name:"logo", type:"logo",label:"logo", rules:[
-          {required:true}
-          ]},
-     {name:"letterHead", type:"letterHead",label:"letterHead", rules:[
-          {required:true}
-          ]},
+     //      {name:"logo", type:"logo",label:"logo", rules:[
+     //      {required:true}
+     //      ]},
+     // {name:"letterHead", type:"letterHead",label:"letterHead", rules:[
+     //      {required:true}
+     //      ]},
      {name:"name", type:"text",label:"name", rules:[
           {required:true}
           ]},

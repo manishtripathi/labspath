@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
 import { AddAdminFields, AddDoctor, CenterFields } from '../../../Component/formFields';
 import FormModal from '../../../Component/Modal/FormModal';
-import { handleAddDoctor } from '../../../Component/commonService';
+import { handleAddcenter, handleAddDoctor } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -22,9 +22,12 @@ const Sidebar = () => {
     setActiveMenu(activeMenu === menu ? '' : menu);
   };
   const handleSubmit = (data) =>{
-    console.log(data);
+    // console.log(data);
     if(activeModal === "doctor"){
       handleAddDoctor(data, setDisplayModal,navigate,token);
+    }else if(activeModal ==="center"){
+      console.log(data)
+      handleAddcenter(data,setDisplayModal,token)
     }
   }
 
@@ -46,7 +49,6 @@ const Sidebar = () => {
   const handleListSelect =(param)=>{
     navigate(`/list/${param}`)
   }
-
 
   return (
     <>
@@ -124,7 +126,7 @@ const Sidebar = () => {
         subMenu={[
         {label:"Add Center", actions:()=>handleFormModalSection("center")}, 
         {label:"Add Admin", actions:()=>handleFormModalSection("admin")}, 
-        {label:"All Centers", actions:()=>handleListSelect("centers")} , 
+        {label:"All Centers", actions:()=>handleListSelect("center")} , 
         {label:"All Admin", actions:()=>handleListSelect("admin")}]}/>
         }
       </div>
