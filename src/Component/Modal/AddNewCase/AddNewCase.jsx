@@ -33,8 +33,8 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center overflow-y-scroll">
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6">
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 overflow-y-scroll custom-height-popup">
         <header className="flex justify-between items-center border-b pb-4 mb-6">
           <h2 className="text-xl font-semibold text-gray-700">Add New Case</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">✕</button>

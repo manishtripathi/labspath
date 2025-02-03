@@ -2,8 +2,7 @@ import React, { useState, useCallback } from "react";
 import { validate } from "./validate";
 import "./controlled.css";
 
-const ControlledInput = ({
-  type = "text",
+const ControlledInputFile = ({
   label,
   value = "",
   rules,
@@ -36,23 +35,27 @@ const ControlledInput = ({
   const displayError = localError || error;
 
   return (
-    <div className={`controlled-input-wrapper ${className}`} >
+    <div className={`relative controlled-input-wrapper ${className}`} >
       {label && (
         <label className="controlled-input-label" >
           {label}
         </label>
       )}
-      <input
-        type={type}
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        className={`controlled-input ${displayError ? "error" : ""}`}
-        
-        {...props}
-      />
+        <input
+          type="file"
+        //   value={value}
+          onChange={handleChange}
+          className={`controlled-input ${displayError ? "error" : ""}`}
+          style={{
+            width: "100%",
+            padding: "0.8rem",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+          }}
+          {...props}
+        />
       {displayError && (
-        <div className="controlled-input-error" >
+        <div className="controlled-input-error" style={{ color: "red", fontSize: "0.85rem", marginTop: "0.5rem" }}>
           {displayError}
         </div>
       )}
@@ -60,4 +63,4 @@ const ControlledInput = ({
   );
 };
 
-export default React.memo(ControlledInput);
+export default React.memo(ControlledInputFile);

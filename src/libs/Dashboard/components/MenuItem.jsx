@@ -22,8 +22,9 @@ const MenuItem = ({ title, icon, isActive, toggleMenu, subMenu = [] }) => {
             <button
               key={index}
               className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md transition-colors duration-200"
+              onClick={()=>item.actions()}
             >
-              {item}
+              {item?.label}
             </button>
           ))}
         </div>
