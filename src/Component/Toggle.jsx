@@ -84,7 +84,7 @@ const Toggle = () => {
             >
                 Admin
             </button>
-            <CustomForm fields = {loginFields} onSubmit={handleSubmit}/>
+            <CustomForm fields = {loginFields()} onSubmit={handleSubmit}/>
         </div>
         </>
     );

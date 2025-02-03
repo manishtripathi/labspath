@@ -6,8 +6,9 @@ import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
 import { AddAdminFields, AddDoctor, AddTest, AddTestCategory, CenterFields } from '../../../Component/formFields';
 import FormModal from '../../../Component/Modal/FormModal';
-import { handleAddcenter, handleAddDoctor } from '../../../Component/commonService';
+import { handleAddcenter, handleAddDoctor, handleAddTestCategory } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
+import { addTestCategory } from '../../services/doctor-action-api';
 
 const Sidebar = () => {
   const [activeMenu, setActiveMenu] = useState('');
@@ -28,6 +29,8 @@ const Sidebar = () => {
     }else if(activeModal ==="center"){
       console.log(data)
       handleAddcenter(data,setDisplayModal,token)
+    } else if (activeModal === "testCategory"){
+      handleAddTestCategory(data, setDisplayModal, navigate)
     }
   }
 

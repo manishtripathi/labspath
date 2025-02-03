@@ -65,6 +65,26 @@ export const AddTestCategory = () => {
 }
 
 
-export const AddTest = () => [
-
-]
+export const AddTest = () => {
+    return [
+        { name: "testName", type: "text", label: "Test Name", rules: [{ required: true }] },
+        { name: "shortName", type: "text", label: "Short Name", rules: [{ required: true }] },
+        { name: "Unit", type: "text", label: "Unit", rules: [{ required: true }] },
+        { 
+            name: "normalValues", type: "array", label: "Normal Values", 
+            fields: [
+                { name: "sex", type: "select", label: "Sex", options: [
+                    { value: "Male", label: "Male" },
+                    { value: "Female", label: "Female" },
+                    { value: "Other", label: "Other" }
+                ], rules: [{ required: true }] },
+                { name: "minAge", type: "number", label: "Min Age", rules: [{ required: true }] },
+                { name: "MaxAge", type: "number", label: "Max Age", rules: [{ required: true }] },
+                { name: "lowerValue", type: "number", label: "Lower Value", rules: [{ required: true }] },
+                { name: "UpperValue", type: "number", label: "Upper Value", rules: [{ required: true }] },
+            ]
+        },
+        { name: "category", type: "select", label: "Category", rules: [{ required: true }], options:[{label:"option1", value:"option1"}] },
+        { name: "rate", type: "number", label: "Rate", rules: [{ required: true }] }
+    ];
+};
