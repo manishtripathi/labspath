@@ -2,8 +2,9 @@ import axios from "axios";
 import store from "../store";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const VERSION = import.meta.env.VITE_VERSION;
 const api = axios.create({
-    baseURL: BASE_URL,
+    baseURL: `${BASE_URL}/${VERSION}`,
 
 })
 
