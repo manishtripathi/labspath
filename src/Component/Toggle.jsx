@@ -6,11 +6,13 @@ import { loginFields } from "./formFields";
 import { loginAsAdmin, loginAsDoctor, loginAsLabCenter } from "../redux/slices/authSlice";
 import { handleLoginAsAdmin, handleLoginAsDoctor, handleLoginAsSuperAdmin } from "./commonService";
 import { useNavigate } from "react-router-dom";
+import MotionLoader from "./Loaders/MotionLoader";
 
 const Toggle = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [activeToggle , setActiveToggle] = useState("Lab Center");
+    const [loader, setLoader] = useState(false);
 
     // Select the `active` state from Redux
     const active = useSelector((state) => {
@@ -28,16 +30,18 @@ const Toggle = () => {
     function handleSubmit(data){
         console.log("form submitted successfully",data);
         if(activeToggle === "Lab Center"){
-            handleLoginAsSuperAdmin(data, dispatch, navigate)
+            handleLoginAsSuperAdmin(data, dispatch, navigate, setLoader)
         }   else if(activeToggle === "Doctor"){
-            handleLoginAsDoctor(data, dispatch, navigate);
+            handleLoginAsDoctor(data, dispatch, navigate, setLoader);
         }   else if(activeToggle === "Admin"){
-            handleLoginAsAdmin(data, dispatch, navigate);
+            handleLoginAsAdmin(data, dispatch, navigate, setLoader);
         }
         
     }
 
     return (
+    <>
+    {loader && <MotionLoader/>}
         <div className="login-toggle">
             <button
                 style={{
@@ -82,6 +86,7 @@ const Toggle = () => {
             </button>
             <CustomForm fields = {loginFields} onSubmit={handleSubmit}/>
         </div>
+        </>
     );
 };
 

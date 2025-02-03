@@ -1,45 +1,75 @@
 import axios from "axios";
+import {toast } from "react-toast"
 import { loginAsAdmin, loginAsDoctor } from "../redux/slices/authSlice"
+import { toastPromise } from "../redux/toastHandler";
+import api from "../redux/apiGateways/apiHandler";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const handleLoginAsDoctor = (data, dispatch, navigate) => {
+const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
+    setLoader(true);
     dispatch(loginAsDoctor(data)).then((res) => {
-        if (res?.status >= 400) {
-            alert("Error Logging in ")
+        if (res?.status >= 400 || !res?.payload?.token) {
+            toast.error(res?.payload?.message || "Error Logging in ")
         } else {
+            toast.success(res?.payload?.message || "Successfull login")
             navigate("/dashboard");
         }
     })
         .catch((err) => {
             console.error(err);
-            alert("Error logging in");
+            toast.error(res?.payload?.message || "Error Logging in ");
+        })
+        .finally(()=>{
+            setLoader(false);
         })
 }
 
-const handleLoginAsAdmin = (data, dispatch, navigate) => {
-    dispatch(loginAsAdmin(data)).then((res) => {
-        if (res?.status >= 400) {
-            alert("Error Logging in ")
-        } else {
-            navigate("/dashboard");
-        }
-    })
-        .catch((err) => {
-            console.error(err);
-            alert("Error logging in");
-        })
-}
+const handleLoginAsAdmin = (data, dispatch, navigate, setLoader) => {
+    setLoader(true);
+    const messages = {
+        pending: "Logging in as Admin...",
+        success: "Login successful!",
+        error: "Error logging in as Admin",
+    };
 
-const handleLoginAsSuperAdmin = (data, dispatch, navigate) => {
+    return toastPromise(
+        dispatch(loginAsAdmin(data)),messages)
+        .then((res) => {
+            if (res?.payload?.token) {
+                toast.success(res?.payload?.message || "Successfull login")
+                navigate("/dashboard");
+            } else {
+                toast.error(res?.payload?.message || "Error Logging in ")
+                throw new Error("Invalid credentials");
+            }
+        })
+        .catch((error) => {
+            toast.error(res?.payload?.message || "Error Logging in ")
+            })
+        .finally(()=>{
+            setLoader(false)
+        });
+};
+
+
+
+const handleLoginAsSuperAdmin = (data, dispatch, navigate, setLoader) => {
+    setLoader(true);
     dispatch(loginAsDoctor(data)).then((res) => {
-        if (res?.status >= 400) {
-            alert("Error Logging in ")
+        debugger
+        
+        if (res?.status >= 400 || !res?.payload?.token) {
+            toast.error(res?.payload?.message || "Error Logging in ")
         } else {
+            toast.success(res?.payload?.message || "Successfull login");
             navigate("/dashboard");
         }
-    })
+        })
         .catch((err) => {
             console.error(err);
-            alert("Error logging in");
+            toast.err(res?.payload?.message || "Error logging in");
+        })
+        .finally(()=>{
+            setLoader(false);
         })
 }
 
@@ -58,10 +88,10 @@ const formReducer = (state, action) => {
 
 // Add Doctor
 
-export const handleAddDoctor = async (data, setDisplayModal, navigate, token) => {
+export const handleAddDoctor = async (data, setDisplayModal, navigate, token, setLoader) => {
     console.log("data for adding doctor", data);
     debugger
-    const res = await axios.post(`${BASE_URL}/api/add-doctor`, data, {
+    const res = await api.post(`/api/add-doctor`, data, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -78,11 +108,8 @@ export const handleAddDoctor = async (data, setDisplayModal, navigate, token) =>
 
 // add center
 
-export const handleAddcenter = async (data, setDisplayModal, token) => {
-    const res = await axios.post(`${BASE_URL}/api/add-center`, data, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+export const handleAddcenter = async (data, setDisplayModal, token, setLoader) => {
+    const res = await api.post(`/api/add-center`, data, {
     })
     console.log(res)
     if (res?.status >= 400) {
@@ -92,6 +119,11 @@ export const handleAddcenter = async (data, setDisplayModal, token) => {
         setDisplayModal(false)
         return alert("Center has been successfully added");
     }
+}
+
+
+export const handleAddTestCategory = (data, dispatch, setLoader) =>{
+    
 }
 
 export { handleLoginAsDoctor, handleLoginAsAdmin, handleLoginAsSuperAdmin, formReducer }

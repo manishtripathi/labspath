@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StatsCard from './components/StatsCard';
 import Sidebar from './components/Sidebar';
 import { TotalCases } from './components/TotalCases';
 import { TotalRevenue } from './components/TotalRevenue';
 import { VisitorList } from './components/VisitorList';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllCenters } from '../../redux/slices/doctorSlice';
 
 const Dashboard = () => {
+
+  const dispatch = useDispatch();
+  const { allCenters } = useSelector(state => state.doctor)
+  useEffect(()=>{
+    if(allCenters?.length === 0 ){
+      dispatch(getAllCenters());
+    }
+  },[dispatch])
+
   return (
     <div className="min-h-screen bg-purple-50 flex">
       {/* Sidebar */}

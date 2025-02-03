@@ -120,6 +120,7 @@ const authSlice = createSlice({
     builder.addCase(createDoctor.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
+      state.token = action.payload.token
     });
     builder.addCase(createDoctor.rejected, (state, action) => {
       state.loading = false;
@@ -130,6 +131,7 @@ const authSlice = createSlice({
     builder.addCase(createAdmin.fulfilled, (state, action) => {
       state.loading = false;
       state.user = action.payload.user;
+      state.token = action.payload.token
     });
     builder.addCase(createAdmin.rejected, (state, action) => {
       state.loading = false;

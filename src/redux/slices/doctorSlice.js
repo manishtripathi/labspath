@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import api, { GetGateway } from "../apiGateways/apiHandler";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const getdoctor = createAsyncThunk('doctor/getdoctor', async ({ token, centerId }, { rejectWithValue }) => {
     try {
         console.log({ token, centerId })
-        const allDoctor = await axios.get(`${BASE_URL}/api/get-drlist/${centerId}`,{
+        const allDoctor = await api.get(`${BASE_URL}/api/get-drlist/${centerId}`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
@@ -17,16 +18,16 @@ export const getdoctor = createAsyncThunk('doctor/getdoctor', async ({ token, ce
 })
 
 
-export const getAllCenters = createAsyncThunk('center/getAllcenter',async(token,thikapi)=>{
+export const getAllCenters = createAsyncThunk('center/getAllcenter',async(token,thunkApi)=>{
     try {
-        const Allcenters = await axios.get(`${BASE_URL}/api/centerlist`,{
+        const Allcenters = await api.get(`${BASE_URL}/api/centerlist`,{
             headers:{
                 Authorization:`Bearer ${token}`
             }
         })
         return Allcenters.data;
     } catch (error) {
-        return thikapi.rejectWithValue(error.response?.data || error.message)
+        return thunkApi.rejectWithValue(error.response?.data || error.message)
     }
 })
 
@@ -61,7 +62,7 @@ const doctorSlice = createSlice({
         })
         .addCase(getAllCenters.fulfilled,(state,action)=>{
             state.loading=false;
-            state.allCenters=action.payload;
+            state.allCenters=action.payload.centerList;
         })
         .addCase(getAllCenters.rejected,(state,action)=>{
             state.loading = false;

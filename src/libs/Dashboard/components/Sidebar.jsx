@@ -4,7 +4,7 @@ import Modal from '../../../Component/Modal/ModalPopUp';
 import AddNewCaseModal from '../../../Component/Modal/AddNewCase/AddNewCase';
 import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
-import { AddAdminFields, AddDoctor, CenterFields } from '../../../Component/formFields';
+import { AddAdminFields, AddDoctor, AddTest, AddTestCategory, CenterFields } from '../../../Component/formFields';
 import FormModal from '../../../Component/Modal/FormModal';
 import { handleAddcenter, handleAddDoctor } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
@@ -34,13 +34,19 @@ const Sidebar = () => {
   const handleFormModalSection = (param) =>{
     setDisplayModal(true);
     if(param === "doctor") {
-      setActiveFields(AddDoctor);
+      setActiveFields(AddDoctor());
       setActiveModal(param);
     } else if (param === "center"){
-      setActiveFields(CenterFields);
+      setActiveFields(CenterFields());
       setActiveModal(param)
     } else if(param === "admin"){
-      setActiveFields(AddAdminFields);
+      setActiveFields(AddAdminFields());
+      setActiveModal(param);
+    } else if (param === "testCategory"){
+      setActiveFields(AddTestCategory());
+      setActiveModal(param);
+    } else if (param === "tests"){
+      setActiveFields(AddTest());
       setActiveModal(param);
     }
   }
@@ -94,7 +100,10 @@ const Sidebar = () => {
           title="Lab"
           isActive={activeMenu === 'Lab'}
           toggleMenu={() => toggleMenu('Lab')}
-          subMenu={[{label:'Tests', actions:{}}, {label:'Schedules', actions:{}}, {label:'Technicians', actions:{}}]}
+          subMenu={[
+            {label:'Add Test Category', actions:()=>handleFormModalSection("testCategory")},
+            {label:'Add Tests', actions:()=>handleFormModalSection("tests")},
+            ]}
         />
         {/* <MenuItem
           title="USG"
@@ -106,7 +115,10 @@ const Sidebar = () => {
           title="Digital X-Ray"
           isActive={activeMenu === 'Digital X-Ray'}
           toggleMenu={() => toggleMenu('Digital X-Ray')}
-          subMenu={[{label:'Images', actions:{}}, {label:'Radiologists', actions:{}}]}
+          subMenu={[
+            {label:'Images', actions:{}},
+            {label:'Radiologists', actions:{}}
+            ]}
         />
 
         <MenuItem

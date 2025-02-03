@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.css"
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
+import { ToastContainer } from "react-toast";
 
 
 
@@ -15,6 +16,16 @@ root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <App />
+      <ToastContainer 
+        position="top-right" 
+        autoClose={1000} 
+        delay={1000}
+        hideProgressBar={false} 
+        newestOnTop={true} 
+        closeOnClick 
+        pauseOnHover
+        draggable 
+      />
     </PersistGate>
   </Provider>
   </BrowserRouter>
