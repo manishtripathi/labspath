@@ -3,7 +3,7 @@ import {toast } from "react-toast"
 import { loginAsAdmin, loginAsDoctor } from "../redux/slices/authSlice"
 import { toastPromise } from "../redux/toastHandler";
 import api from "../redux/apiGateways/apiHandler";
-import { addTestCategory } from "../libs/services/doctor-action-api";
+import { addTest, addTestCategory } from "../libs/services/doctor-action-api";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
     setLoader(true);
@@ -125,6 +125,18 @@ export const handleAddcenter = async (data, setDisplayModal, token, setLoader) =
 
 export const handleAddTestCategory = async(data, setDisplayModal, setLoader) =>{
     const res = await addTestCategory(data);
+    console.log(res)
+    if (res?.status >= 400) {
+        setDisplayModal(false)
+        return toast.error("Error adding Center");
+    } else {
+        setDisplayModal(false)
+        return toast.success("Center has been successfully added");
+    }
+}   
+
+export const handleAddTest = async(data, setDisplayModal, setLoader) =>{
+    const res = await addTest(data);
     console.log(res)
     if (res?.status >= 400) {
         setDisplayModal(false)

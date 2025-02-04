@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
 import { AddAdminFields, AddDoctor, AddTest, AddTestCategory, CenterFields } from '../../../Component/formFields';
 import FormModal from '../../../Component/Modal/FormModal';
-import { handleAddcenter, handleAddDoctor, handleAddTestCategory } from '../../../Component/commonService';
+import { handleAddcenter, handleAddDoctor, handleAddTest, handleAddTestCategory } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
 import { addTestCategory } from '../../services/doctor-action-api';
 
@@ -31,6 +31,8 @@ const Sidebar = () => {
       handleAddcenter(data,setDisplayModal,token)
     } else if (activeModal === "testCategory"){
       handleAddTestCategory(data, setDisplayModal, navigate)
+    } else if (activeModal === "tests"){
+      handleAddTest(data, setDisplayModal, navigate)
     }
   }
 
