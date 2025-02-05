@@ -21,3 +21,15 @@ body{
 .custom-height-popup{
   max-height: 600px;
 }
+.dots-img {
+  position: absolute;
+  left: -15px;
+  width: 24px;
+  top: 10px;
+}
+.dots {
+  position: relative;  
+}
+.custom-sidebarbg{
+  background-color: #FBFBFD;
+}

@@ -43,48 +43,56 @@ const Toggle = () => {
     <>
     {loader && <MotionLoader/>}
         <div className="login-toggle">
-            <button
-                style={{
-                    backgroundColor: activeToggle === "Lab Center" ? "purple" : "white",
-                    color: activeToggle === "Lab Center" ? "white" : "black",
-                    border: "1px solid #ccc",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                }}
-                onClick={() => handleToggle("Lab Center")}
-            >
-                Lab Center
-            </button>
+            <div className="mb-8">
+                <button
+                    style={{
+                        backgroundColor: activeToggle === "Lab Center" ? "purple" : "#F4F0FB",
+                        color: activeToggle === "Lab Center" ? "white" : "black",                   
+                        padding: "6px 20px",
+                        cursor: "pointer",
+                        borderRadius: "3px",
+                        margin: "2px 5px",
+                        fontSize: "16px",
+                        fontWeight: "600"
+                    }}
+                    onClick={() => handleToggle("Lab Center")}
+                >
+                    Lab Center
+                </button>
 
-            <button
-                style={{
-                    backgroundColor: activeToggle === "Doctor" ? "purple" : "white",
-                    color: activeToggle === "Doctor" ? "white" : "black",
-                    border: "1px solid #ccc",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                }}
-                onClick={() => handleToggle("Doctor")}
-            >
-                Doctor
-            </button>
+                <button
+                    style={{
+                        backgroundColor: activeToggle === "Doctor" ? "purple" : "#F4F0FB",
+                        color: activeToggle === "Doctor" ? "white" : "black",
+                        padding: "6px 20px",
+                        cursor: "pointer",
+                        borderRadius: "3px",
+                        margin: "2px 5px",
+                        fontSize: "16px",
+                        fontWeight: "600"
+                    }}
+                    onClick={() => handleToggle("Doctor")}
+                >
+                    Doctor
+                </button>
 
-            <button
-                style={{
-                    backgroundColor: activeToggle === "Admin" ? "purple" : "white",
-                    color: activeToggle === "Admin" ? "white" : "black",
-                    border: "1px solid #ccc",
-                    padding: "10px 20px",
-                    cursor: "pointer",
-                    borderRadius: "5px",
-                }}
-                onClick={() => handleToggle("Admin")}
-            >
-                Admin
-            </button>
-            <CustomForm fields = {loginFields()} onSubmit={handleSubmit}/>
+                <button
+                    style={{
+                        backgroundColor: activeToggle === "Admin" ? "purple" : "#F4F0FB",
+                        color: activeToggle === "Admin" ? "white" : "black",                   
+                        padding: "6px 20px",
+                        cursor: "pointer",
+                        borderRadius: "3px",
+                        margin: "2px 5px",
+                        fontSize: "16px",
+                        fontWeight: "600"
+                    }}
+                    onClick={() => handleToggle("Admin")}
+                >
+                    Admin
+                </button>
+            </div>
+            <CustomForm fields = {loginFields()} onSubmit={handleSubmit} />
         </div>
         </>
     );
