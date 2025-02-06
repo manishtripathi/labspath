@@ -6,8 +6,8 @@ const MenuItem = ({ title, icon, isActive, toggleMenu, subMenu = [] }) => {
     <div className="transition-all duration-300">
       <button
         onClick={toggleMenu}
-        className={`w-full flex justify-between items-center px-4 py-2 text-gray-700 hover:bg-purple-100 transition-all duration-300 rounded-lg shadow-sm ${
-          isActive ? 'bg-purple-200 font-semibold' : ''
+        className={`w-full flex justify-between items-center px-4 transition-all duration-300 custom-menu ${
+          isActive ? 'font-semibold active' : ''
         }`}
       >
         <span className="flex items-center gap-2">
@@ -21,7 +21,7 @@ const MenuItem = ({ title, icon, isActive, toggleMenu, subMenu = [] }) => {
           {subMenu.map((item, index) => (
             <button
               key={index}
-              className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-200 rounded-md transition-colors duration-200"
+              className="block w-full custom-menu text-left px-4 text-gray-600 transition-colors duration-200"
               onClick={()=>item.actions()}
             >
               {item?.label}

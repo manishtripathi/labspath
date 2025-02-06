@@ -84,7 +84,7 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
       )}
       })}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
-        <label style={{ display: "flex", alignItems: "center" }}>
+        <label className="remeber" style={{ display: "flex", alignItems: "center" }}>
           <input type="checkbox" style={{ marginRight: "0.5rem" }} />
           Remember me
         </label>
@@ -102,6 +102,7 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
           borderRadius: "8px",
           border: "none",
           fontWeight: "bold",
+          fontSize: "16px"
         }}
       >
         Sign In

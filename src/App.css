@@ -1,10 +1,22 @@
 @import url(./Pages/useraccount/login.scss);
 @import url(./Component/sidebar.scss);
+@import url(././libs/Dashboard/components/menuitem.scss);
+@import url(././libs/Dashboard/components/dashboard.scss);
+
+@font-face {
+  font-family: 'latoregular';
+  src: url('./assets/Fonts/lato-regular-webfont.woff2') format('woff2'),
+       url('./assets/Fonts/lato-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
 
 
 body{
   background-color: #F4F0FB;
-  font-family: sans-serif;
+  font-family: 'latoregular', sans-serif;
+  font-size: 14px;
 
 }
 .backgroundimage{

@@ -5,8 +5,8 @@
 .controlled-input-label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #333;
+  font-weight: 300;
+  color: var(--label-type-color);
   width: fit-content;
   text-transform: capitalize;
 }

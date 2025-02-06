@@ -6,6 +6,7 @@ import { TotalRevenue } from './components/TotalRevenue';
 import { VisitorList } from './components/VisitorList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCenters } from '../../redux/slices/doctorSlice';
+import { GiMicroscope } from "react-icons/gi";
 
 const Dashboard = () => {
 
@@ -37,11 +38,15 @@ const Dashboard = () => {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+       
           <StatsCard
+          Icon={GiMicroscope} 
             title="Total Income Dec 2024"
             value="$4,562"
             description="35 Test Records"
-            gradient="bg-gradient-to-r from-yellow-400 to-purple-600 text-white"
+            gradient="bg-gradient-r text-white"
+            
+            
           />
           <StatsCard
             title="Total Collection Charges Dec"

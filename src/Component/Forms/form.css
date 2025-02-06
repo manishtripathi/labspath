@@ -1,3 +1,5 @@
+
+
 .controlled-input-wrapper {
   width: 100%;
 }
@@ -11,9 +13,13 @@
 }
 
 .custom-form {
-  font-family: Arial, sans-serif;
+  font-family: 'latoregular', sans-serif;
 }
 
 .custom-form button:hover {
   background-color: #5a55ff;
+}
+.remeber{
+  color: var(--label-type-color);
+  font-weight: 200;
 }
