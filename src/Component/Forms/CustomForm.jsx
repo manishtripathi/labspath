@@ -52,7 +52,7 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="custom-form" style={{ maxWidth: "400px", margin: "auto" }}>
+    <form onSubmit={handleSubmit} className="custom-form" style={{ minWidth: "500px", margin: "auto" }}>
       {fields.map((field) => {
          
          if(field?.type?.toLowerCase() === ("password" || "pwd")){
@@ -88,7 +88,7 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
           <input type="checkbox" style={{ marginRight: "0.5rem" }} />
           Remember me
         </label>
-        <a href="/forgot-password" style={{ color: "#6C63FF", textDecoration: "none" }}>
+        <a href="/forgot-password" style={{ color: "#450087", textDecoration: "underline" }}>
           Forgot Password?
         </a>
       </div>
@@ -96,7 +96,7 @@ const CustomForm = ({ fields = [], onSubmit = () => {} }) => {
         type="submit"
         style={{
           width: "100%",
-          backgroundColor: "#6C63FF",
+          backgroundColor: "#450087",
           color: "#fff",
           padding: "0.8rem",
           borderRadius: "8px",

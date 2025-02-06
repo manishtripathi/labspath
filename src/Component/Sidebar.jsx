@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../redux/menuSlice';
 
+
 const Sidebar = () => {
     
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Sidebar = () => {
   return (
     <div className='sidebar'>
       <div className="sidebar-header">
-        <div className="logo">LAB Smart</div>
+        <div className="logo"><img src={Dlogo} alt='dashboard-logo' title='logo'/></div>
         <button className="add-case-btn">Add New Case</button>
       </div>
       <div className='sidebar-menu'>

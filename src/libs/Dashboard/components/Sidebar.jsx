@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import MenuItem from './MenuItem';
 import Modal from '../../../Component/Modal/ModalPopUp';
+import Dlogo from '../../../assets/img/dashboardlogo.svg'
+import Dots from '../../../assets/img/dots.svg'
 import AddNewCaseModal from '../../../Component/Modal/AddNewCase/AddNewCase';
 import { useSelector } from 'react-redux';
 import { getFormModal } from '../../../Common';
@@ -9,6 +11,7 @@ import FormModal from '../../../Component/Modal/FormModal';
 import { handleAddcenter, handleAddDoctor, handleAddTest, handleAddTestCategory } from '../../../Component/commonService';
 import { useNavigate } from 'react-router-dom';
 import { addTestCategory } from '../../services/doctor-action-api';
+
 
 const Sidebar = () => {
   const [activeMenu, setActiveMenu] = useState('');
@@ -64,20 +67,20 @@ const Sidebar = () => {
   return (
     <>
     {(displayModal && activeFields?.length>0) && <FormModal fields ={activeFields} onSubmit={handleSubmit} showModal = {displayModal} onClose = {()=>setDisplayModal(false)}/>}
-    <div className="w-64 bg-gray-100 h-screen shadow-lg">
+    <div className="w-64 custom-sidebarbg h-screen shadow-lg">
       <AddNewCaseModal isOpen={addNewCase} onClose={() => setAddNewCase(false)} >
       </AddNewCaseModal>
 
-      <div className="p-4 border-b border-gray-300">
+      <div className="p-4 border-gray-300">
         <div className="flex items-center gap-2">
-          <img src="/logo.png" alt="Lab Smart Logo" className="w-8 h-8" />
-          <span className="text-lg font-bold text-purple-700">
-            Lab <span className="text-yellow-500">Smart</span>
-          </span>
+          <img src={Dlogo} alt="Lab Smart Logo" className="" />          
+        </div>
+        <div className="dots">
+          <img src={Dots} className='dots-img ' alt='dots'/>
         </div>
         <button
           onClick={() => setAddNewCase(true)}
-          className="mt-4 w-full py-2 bg-yellow-500 text-white rounded-md shadow hover:bg-yellow-600"
+          className="mt-7 w-8/12 ms-5 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600"
         >
           Add New Case
         </button>
