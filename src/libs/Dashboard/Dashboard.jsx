@@ -5,15 +5,20 @@ import { TotalCases } from './components/TotalCases';
 import { TotalRevenue } from './components/TotalRevenue';
 import { VisitorList } from './components/VisitorList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCenters } from '../../redux/slices/doctorSlice';
+// import { getAllCenters } from '../../redux/slices/doctorSlice';
+import { getAllCenters,getAlltestCategorylst } from '../../redux/slices/getDropdownoptionSlice';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
-  const { allCenters } = useSelector(state => state.doctor)
+  const { allCenters,allTestCategory } = useSelector(state => state.dropDownOptions)
   useEffect(()=>{
+    
     if(allCenters?.length === 0 ){
       dispatch(getAllCenters());
+    }
+    if(allTestCategory?.length === 0){
+      dispatch(getAlltestCategorylst());
     }
   },[dispatch])
 

@@ -1,4 +1,4 @@
-import { getAllCenters, getdoctor } from "../../redux/slices/doctorSlice";
+import { getAllCenters, getdoctor } from "../../redux/slices/getDropdownoptionSlice";
 
 export const getTableListData = (listName,{token,centerId}, dispatch, setTableData) =>{
     switch (listName) {

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import api, { GetGateway } from "../apiGateways/apiHandler";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 

@@ -15,7 +15,7 @@ export const loginFields = () => [
 
 export const AddDoctor = () => {
      debugger
-    const allCenters = store.getState().doctor.allCenters || [];
+    const allCenters = store.getState().dropDownOptions.allCenters || [];
 
     return [
         { name: "name", type: "text", label: "Name", rules: [{ required: true }] },
@@ -36,7 +36,7 @@ export const CenterFields = () => [
 ];
 
 export const AddAdminFields = () => {
-    const allCenters = store.getState().doctor.allCenters || [];
+    const allCenters = store.getState().dropDownOptions.allCenters || [];
 
     return [
         { name: "name", type: "text", label: "Name", rules: [{ required: true }] },
@@ -52,7 +52,7 @@ export const AddAdminFields = () => {
 
 
 export const AddTestCategory = () => {
-     const allCenters = store.getState().doctor.allCenters || [];
+     const allCenters = store.getState().dropDownOptions.allCenters || [];
 
     return [
         { name: "name", type: "text", label: "Name", rules: [{ required: true }] },
@@ -66,6 +66,7 @@ export const AddTestCategory = () => {
 
 
 export const AddTest = () => {
+    const allTests = store.getState().dropDownOptions.allTestCategoy || [];
     return [
         { name: "testName", type: "text", label: "Test Name", rules: [{ required: true }] },
         { name: "shortName", type: "text", label: "Short Name", rules: [{ required: true }] },
@@ -84,7 +85,7 @@ export const AddTest = () => {
                 { name: "UpperValue", type: "number", label: "Upper Value", rules: [{ required: true }] },
             ]
         },
-        { name: "category", type: "select", label: "Category", rules: [{ required: true }], options:[{label:"option1", value:"option1"}] },
+        { name: "category", type: "select", label: "Category", rules: [{ required: true }], options:allTests.map(category => ({ value: category._id, label: category.name })), },
         { name: "rate", type: "number", label: "Rate", rules: [{ required: true }] }
     ];
 };
