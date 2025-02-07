@@ -1,20 +1,25 @@
 import React, { useEffect } from 'react';
-import StatsCard from './components/StatsCard';
+import {StatsCard, StatsCard2} from './components/StatsCard';
 import Sidebar from './components/Sidebar';
 import { TotalCases } from './components/TotalCases';
 import { TotalRevenue } from './components/TotalRevenue';
 import { VisitorList } from './components/VisitorList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllCenters } from '../../redux/slices/doctorSlice';
+// import { getAllCenters } from '../../redux/slices/doctorSlice';
 import { GiMicroscope } from "react-icons/gi";
+import { getAllCenters,getAlltestCategorylst } from '../../redux/slices/getDropdownoptionSlice';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
-  const { allCenters } = useSelector(state => state.doctor)
+  const { allCenters,allTestCategory } = useSelector(state => state.dropDownOptions)
   useEffect(()=>{
+    
     if(allCenters?.length === 0 ){
       dispatch(getAllCenters());
+    }
+    if(allTestCategory?.length === 0){
+      dispatch(getAlltestCategorylst());
     }
   },[dispatch])
 
@@ -37,24 +42,30 @@ const Dashboard = () => {
           </div>
         </header>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section className="flex justify-between items-center">
        
           <StatsCard
           Icon={GiMicroscope} 
-            title="Total Income Dec 2024"
+            title="Total Income "
+            years="Dec 2024"
             value="$4,562"
             description="35 Test Records"
-            gradient="bg-gradient-r text-white"
-            
+            gradient="bg-gradient-r text-white "            
+            className="w-2/5"
+          />
+          <StatsCard2
+            value="$0.00"
+            title="Total Collection Charges "
+            years="Dec"
+            className="w-3/12 custom-text-color"
             
           />
-          <StatsCard
-            title="Total Collection Charges Dec"
+          <StatsCard2
+            title="Expenses In"
+            years="Dec"
             value="$0.00"
-          />
-          <StatsCard
-            title="Expenses In Dec"
-            value="$0.00"
+            className="w-3/12 custom-text-color"
+            Icon={GiMicroscope}
           />
         </section>
 

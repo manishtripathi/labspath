@@ -1,3 +1,9 @@
 .bg-gradient-r{
-    background: linear-gradient(to right, rgba(232,201,82,1), rgba(69,0,135, .8) );
+    background: linear-gradient(to right, rgba(232,201,82,1), rgba(69,0,135, .8) ), url(../../../assets/img/Skyscrapers.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+.custom-text-color {
+    color: #450087;
 }

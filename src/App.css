@@ -45,3 +45,6 @@ body{
 .custom-sidebarbg{
   background-color: #FBFBFD;
 }
+.active-text{
+  color: var(--active-type-color);
+}
