@@ -7,6 +7,8 @@ import { VisitorList } from './components/VisitorList';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getAllCenters } from '../../redux/slices/doctorSlice';
 import { GiMicroscope } from "react-icons/gi";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+
 import { getAllCenters,getAlltestCategorylst } from '../../redux/slices/getDropdownoptionSlice';
 
 const Dashboard = () => {
@@ -58,6 +60,8 @@ const Dashboard = () => {
             title="Total Collection Charges "
             years="Dec"
             className="w-3/12 custom-text-color"
+            tooltip="This is the total charges of the dec"
+            Icon={IoIosInformationCircleOutline }
             
           />
           <StatsCard2
@@ -65,7 +69,8 @@ const Dashboard = () => {
             years="Dec"
             value="$0.00"
             className="w-3/12 custom-text-color"
-            Icon={GiMicroscope}
+            tooltip="This is the total expenses of the dec"
+            Icon={IoIosInformationCircleOutline}
           />
         </section>
 
