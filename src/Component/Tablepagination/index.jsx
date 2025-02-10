@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaGripVertical } from "react-icons/fa6";
+import Modal from "../Modal/ModalPopUp";
+import TableList from "../../libs/TableList";
 // import { ChevronLeft, ChevronRight, MoreVertical } from "lucide-react";
 
-const TableWithPagination = ({ data, rowsPerPage = 5, dataRowHeadingList, actions }) => {
+const TableWithPagination = ({
+  data,
+  rowsPerPage = 5,
+  dataRowHeadingList,
+  actions,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeRow, setActiveRow] = useState(null);
-
+  const [activeValue, setActivevalue] = useState([]);
+  const [isShowModel, setShowModel] = useState(false);
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
   const handleChangePage = (direction) => {
@@ -26,24 +34,53 @@ const TableWithPagination = ({ data, rowsPerPage = 5, dataRowHeadingList, action
     setActiveRow(activeRow === rowId ? null : rowId);
   };
 
+  const handleCloseModal = () => {
+    setShowModel(false);
+  };
+
+  const handleViewMore = (value) => {
+    setActivevalue(value);
+    setShowModel(true);
+  };
+
   return (
     <div className="p-4">
       <table className="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden shadow-md">
         <thead className="bg-gray-100 text-gray-600 text-left">
           <tr>
             {dataRowHeadingList.map((heading, index) => (
-              <th key={index} className="p-3 border-b border-gray-300">{heading}</th>
+              <th key={index} className="p-3 border-b border-gray-300">
+                {heading}
+              </th>
             ))}
             <th className="p-3 border-b border-gray-300">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {getPaginatedData().map((item,index) => (
+          {getPaginatedData().map((item, index) => (
             <tr
               key={item._id}
-              className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+              className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+            >
               {Object.values(item).map((value, index) => (
-                <td key={index} className="p-3 border-b border-gray-200">{value}</td>
+                <>
+                  <td key={index} className="p-3 border-b border-gray-200">
+                    {Array.isArray(value) ? (
+                      <button onClick={() => handleViewMore(value)}>
+                        View More
+                      </button>
+                    ) : (
+                      value
+                    )}
+                  </td>
+                  <Modal
+                    isOpen={isShowModel}
+                    onClose={handleCloseModal}
+                    title={"test title"}
+                  >
+                    <TableList tabledata={activeValue} />
+                  </Modal>
+                </>
               ))}
               <td className="p-3 border-b border-gray-200 relative">
                 <button

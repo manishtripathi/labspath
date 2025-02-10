@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GiMicroscope } from "react-icons/gi";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
-import { getAllCenters,getAlltestCategorylst } from '../../redux/slices/getDropdownoptionSlice';
+import { getAllAdmins, getAllCenters,getAlltest,getAlltestCategorylst, getdoctor } from '../../redux/slices/getDropdownoptionSlice';
 
 const Dashboard = () => {
 
   const dispatch = useDispatch();
-  const { allCenters,allTestCategory } = useSelector(state => state.dropDownOptions)
+  const { allCenters,allTestCategory , allDoctor,alltest,allAdmins} = useSelector(state => state.dropDownOptions)
   useEffect(()=>{
     
     if(allCenters?.length === 0 ){
@@ -22,6 +22,15 @@ const Dashboard = () => {
     }
     if(allTestCategory?.length === 0){
       dispatch(getAlltestCategorylst());
+    }
+    if(allDoctor?.length === 0 ){
+      dispatch(getdoctor());
+    }
+    if(alltest?.length === 0 ){
+      dispatch(getAlltest());
+    }
+    if(allAdmins?.length === 0 ){
+      dispatch(getAllAdmins());
     }
   },[dispatch])
 

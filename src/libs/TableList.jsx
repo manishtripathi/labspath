@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getdoctor } from '../redux/slices/doctorSlice'
 import { useParams } from 'react-router-dom'
 import { useTableList } from './services/useTableList'
-const TableList = () => {
+const TableList = ({tabledata}) => {
     const actions = (row) =>(
         <div>
             <button onClick={() => alert(`Edit ${row.name}`)}>Edit</button>
@@ -12,7 +12,7 @@ const TableList = () => {
         </div>
     );
 
-    const {tableData , headers} = useTableList();
+    const {tableData , headers} = useTableList(tabledata);
     return (
         <div>
             <TableWithPagination data={tableData} rowsPerPage={6} dataRowHeadingList={headers} actions={actions} />
