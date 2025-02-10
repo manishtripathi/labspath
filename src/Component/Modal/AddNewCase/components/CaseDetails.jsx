@@ -41,14 +41,16 @@ const CaseDetails = ({ formData, onInputChange }) => {
           />
         </div>
         <div className="flex items-center">
-          <ControlledInput
+        <label className="block text-sm font-medium text-gray-600">
+          <input
             type="checkbox"
             className="mr-2"
             checked={formData.isOutsourceLab}
             onChange={(e,error) => onInputChange('isOutsourceLab', e.target.checked)}
+            description= ""
           />
-          <label className="block text-sm font-medium text-gray-600">
-            Is sample collected by outsource lab?
+          <span>  Is sample collected by outsource lab? </span>
+           
           </label>
         </div>
         <div>

@@ -15,7 +15,7 @@ export const getAlltest = createAsyncThunk('dropdownoption/getalltest', async ({
 })
 
 export const getAlltestCategorylst = createAsyncThunk('dropdownoption/getalltestcategory', async (_, { rejectWithValue }) => {
-    debugger
+    
     try {
         const allTestcategory = await api.get(`categories`)
         return allTestcategory.data

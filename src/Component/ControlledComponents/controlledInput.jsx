@@ -7,10 +7,12 @@ const ControlledInput = ({
   label,
   value = "",
   rules,
+  title,
   className = "",
   onChange = () => {},
   onBlur = () => {},
   error,
+  
   ...props
 }) => {
   const [localError, setLocalError] = useState("");
@@ -51,6 +53,11 @@ const ControlledInput = ({
         
         {...props}
       />
+      {/* {title && (
+        <div className="titledescription">
+          {title}
+        </div>
+      )} */}
       {displayError && (
         <div className="controlled-input-error" >
           {displayError}
