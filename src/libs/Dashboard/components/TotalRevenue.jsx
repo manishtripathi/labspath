@@ -33,17 +33,24 @@ export const TotalRevenue = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold text-gray-700 mb-4">Total Revenue</h2>
-      <p className="text-2xl font-bold text-purple-700">$236,536</p>
-      <div className="flex items-center space-x-4 mt-4">
-        <span className="text-sm text-gray-600 cursor-pointer underline">Monthly</span>
-        <span className="text-sm text-gray-600 cursor-pointer underline">Weekly</span>
-        <span className="text-sm text-gray-600 cursor-pointer underline">Today</span>
+    <>
+      <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="flex justify-between ">
+          <div className="total-revenue">
+            <h2 className="text-lg font-semibold text-gray-700 ">Total Revenue</h2>
+            <p className="text-2xl font-bold ">$236,536</p>
+          </div>
+          <div className="flex items-top space-x-4">
+            <span className="text-sm text-gray-600 font-semibold cursor-pointer ">Monthly</span>
+            <span className="text-sm text-gray-600 font-semibold cursor-pointer ">Weekly</span>
+            <span className="text-sm text-gray-600 font-semibold cursor-pointer underline">Today</span>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <Bar data={barData} />
+        </div>
       </div>
-      <div className="mt-4">
-        <Bar data={barData} />
-      </div>
-    </div>
+    </>
   );
 };

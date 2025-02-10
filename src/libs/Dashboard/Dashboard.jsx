@@ -31,7 +31,7 @@ const Dashboard = () => {
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
+      <main className="flex-1 p-6 main-container">
         <header className="flex items-center justify-between mb-6">
           <h1 className="text-xl font-bold text-purple-700">Dashboard</h1>
           <div className="flex items-center space-x-4">
@@ -79,7 +79,7 @@ const Dashboard = () => {
           <TotalRevenue/>
         </section>
 
-        <section>
+        <section className='mb-6 mt-6'>
             <VisitorList/>
         </section>
       </main>

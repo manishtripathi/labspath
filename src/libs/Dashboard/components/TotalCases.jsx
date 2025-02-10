@@ -23,13 +23,16 @@ export const TotalCases = () => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold text-gray-700 mb-4">Total Cases</h2>
+      
       <div className="flex justify-between">
-        <p className="text-2xl font-bold text-purple-700">1236</p>
-        <div className="flex items-center space-x-4">
-          <span className="text-sm text-gray-600 cursor-pointer underline">Monthly</span>
-          <span className="text-sm text-gray-600 cursor-pointer underline">Weekly</span>
-          <span className="text-sm text-gray-600 cursor-pointer underline">Today</span>
+        <div className="total-cases">
+          <h2 className="text-lg font-semibold text-gray-700">Total Cases</h2>
+          <p className="text-2xl font-bold ">1236</p>
+        </div>
+        <div className="flex items-top space-x-4">
+          <span className="text-sm text-gray-600 font-semibold cursor-pointer underline">Monthly</span>
+          <span className="text-sm text-gray-600 font-semibold cursor-pointer ">Weekly</span>
+          <span className="text-sm text-gray-600 font-semibold cursor-pointer ">Today</span>
         </div>
       </div>
       <div className="mt-4">

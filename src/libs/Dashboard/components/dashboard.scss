@@ -7,9 +7,14 @@
 .custom-text-color {
     color: #450087;
 }
+.main-container {
+  width: calc(100% - 250px);
+  margin-left: 250px;
+}
 .icon-wrapper {
     position: relative;
-    display: inline-block;
+    display: flex;
+    width: fit-content;
   }
   
   .tooltip {
@@ -32,4 +37,3 @@
     visibility: visible;
     opacity: 1;
   }
-  

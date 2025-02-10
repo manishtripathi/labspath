@@ -44,7 +44,13 @@ body{
 }
 .custom-sidebarbg{
   background-color: #FBFBFD;
+  position: fixed;
 }
 .active-text{
   color: var(--active-type-color);
+}
+td {
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
 }
