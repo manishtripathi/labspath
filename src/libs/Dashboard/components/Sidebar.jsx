@@ -15,6 +15,7 @@ import {
 } from "../../../Component/formFields";
 import FormModal from "../../../Component/Modal/FormModal";
 import {
+  handleAddAdmin,
   handleAddcenter,
   handleAddDoctor,
   handleAddTest,
@@ -46,6 +47,8 @@ const Sidebar = () => {
       handleAddTestCategory(data, setDisplayModal, navigate);
     } else if (activeModal === "tests") {
       handleAddTest(data, setDisplayModal, navigate);
+    } else if (activeModal === "admin") {
+      handleAddAdmin(data, setDisplayModal, navigate);
     }
   };
 

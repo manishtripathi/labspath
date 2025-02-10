@@ -30,11 +30,11 @@ const Toggle = () => {
     function handleSubmit(data){
         console.log("form submitted successfully",data);
         if(activeToggle === "Lab Center"){
-            handleLoginAsSuperAdmin(data, dispatch, navigate, setLoader)
+            handleLoginAsAdmin(data, dispatch, navigate, setLoader)
         }   else if(activeToggle === "Doctor"){
             handleLoginAsDoctor(data, dispatch, navigate, setLoader);
         }   else if(activeToggle === "Admin"){
-            handleLoginAsAdmin(data, dispatch, navigate, setLoader);
+            handleLoginAsSuperAdmin(data, dispatch, navigate, setLoader);
         }
         
     }

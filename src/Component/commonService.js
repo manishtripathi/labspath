@@ -25,7 +25,7 @@ const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
         })
 }
 
-const handleLoginAsAdmin = (data, dispatch, navigate, setLoader) => {
+ const handleLoginAsAdmin = (data, dispatch, navigate, setLoader) => {
     setLoader(true);
     const messages = {
         pending: "Logging in as Admin...",
@@ -98,29 +98,54 @@ export const handleAddDoctor = async (data, setDisplayModal, navigate, token, se
             Authorization: `Bearer ${token}`
         }
     });
+    {setLoader && setLoader(true)}
     console.log(res)
     if (res?.status >= 400) {
         setDisplayModal(false)
-        return alert("Error adding doctor");
+        {setLoader && setLoader(false)}
+        return toast.error("Error adding doctor");
     } else {
         setDisplayModal(false)
-        return alert("Dcotor has been successfully added");
+        {setLoader && setLoader(false)}
+        return toast.success("Dcotor has been successfully added");
     }
+    
 }
 
 // add center
 
-export const handleAddcenter = async (data, setDisplayModal, token, setLoader) => {
-    const res = await api.post(`/api/add-center`, data, {
+export const handleAddcenter = async (data, setDisplayModal, setLoader) => {
+    const res = await api.post(`add-center`, data, {
     })
+    {setLoader && setLoader(true)}
     console.log(res)
     if (res?.status >= 400) {
         setDisplayModal(false)
-        return alert("Error adding Center");
+        {setLoader && setLoader(false)}
+        return toast.error("Error adding Center");
     } else {
         setDisplayModal(false)
-        return alert("Center has been successfully added");
+        {setLoader && setLoader(false)}
+        return toast.success("Center has been successfully added");
     }
+    
+}
+
+export const handleAddAdmin = async (data, setDisplayModal, setLoader) => {
+    const res = await api.post(`add-admin`, data, {
+    })
+    {setLoader && setLoader(true)}
+    console.log(res)
+    if (res?.status >= 400) {
+        setDisplayModal(false)
+        {setLoader && setLoader(false)}
+        return toast.error("Error adding Center");
+    } else {
+        setDisplayModal(false)
+        {setLoader && setLoader(false)}
+        return toast.success("Center has been successfully added");
+    }
+    
 }
 
 
