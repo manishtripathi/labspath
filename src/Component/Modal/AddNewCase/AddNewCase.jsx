@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PatientDetails from './components/PatientDetails';
 import CaseDetails from './components/CaseDetails';
+import PaymentDetail from './components/PaymentDetail';
 
 const AddNewCaseModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,14 +11,21 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
     gender: '',
     mobile: '',
     dob: '',
+    email: '',
+    aadhar: '',
+    address: '',
+    patientHistory: '',
     onlineReport: [],
     referredBy: '',
     collectionCenter: '',
     collectedBy: '',
     isOutsourceLab: false,
-    recommendedTest: '',
+    recommendedTest: [],
     paid: '',
     discount: '',
+    balance: '',
+    mode: '',
+    remark: '',
   });
 
   const handleInputChange = (field, value) => {
@@ -46,18 +54,14 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
         {/* Case Details Section */}
         <CaseDetails formData={formData} onInputChange={handleInputChange} />
 
+        <PaymentDetail formData = {formData} onInputChange =  {handleInputChange}/>
+
         {/* Footer Buttons */}
         <footer className="flex justify-end mt-6">
-          <button
-            className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md mr-4"
-            onClick={onClose}
-          >
+          <button className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md mr-4" onClick={onClose}>
             Cancel
           </button>
-          <button
-            className="px-6 py-2 bg-purple-600 text-white rounded-md"
-            onClick={handleSubmit}
-          >
+          <button className="px-6 py-2 bg-purple-600 text-white rounded-md" onClick={handleSubmit}>
             Submit
           </button>
         </footer>

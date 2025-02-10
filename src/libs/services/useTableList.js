@@ -4,18 +4,19 @@ import { useParams } from "react-router-dom"
 import { getdoctor } from "../../redux/slices/doctorSlice"
 import { getTableListData } from "./getTableListData"
 
-export const useTableList = () =>{
+export const useTableList = (tabledata) =>{
     const dispatch = useDispatch()
     const {listName} = useParams()
-    const [tableData, setTableData] = useState([])
+    const [tableData, setTableData] = useState(tabledata || [])
     const [headers, setHeaders] = useState([]);
     console.log(listName)
     const { token,user } = useSelector(store => store.auth)
+    const dropdownoptions = useSelector(state =>state.dropDownOptions)
     const centerId = "679a57d1c8a76dff3665773e"
 
     useEffect(() => {
-        if(token)
-        getTableListData(listName, {token, centerId}, dispatch, setTableData)
+        if(!tabledata && token)
+        getTableListData(listName, dispatch, setTableData, dropdownoptions)
     }, [token])
 
     useEffect(()=>{

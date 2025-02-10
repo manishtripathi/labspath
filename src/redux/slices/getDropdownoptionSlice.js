@@ -4,9 +4,8 @@ import api, { GetGateway } from "../apiGateways/apiHandler";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
-export const getAlltest = createAsyncThunk('dropdownoption/getalltest', async ({ token }, { rejectWithValue }) => {
+export const getAlltest = createAsyncThunk('dropdownoption/getalltest', async (_, { rejectWithValue }) => {
     try {
-        console.log({ token, centerId })
         const allTest = await api.get(`tests`)
         return allTest.data
     } catch (error) {
@@ -27,9 +26,8 @@ export const getAlltestCategorylst = createAsyncThunk('dropdownoption/getalltest
 
 
 
-export const getdoctor = createAsyncThunk('doctor/getdoctor', async ({ token, centerId }, { rejectWithValue }) => {
+export const getdoctor = createAsyncThunk('doctor/getdoctor', async (_, { rejectWithValue }) => {
     try {
-        console.log({ token, centerId })
         const allDoctor = await api.get(`get-drlist`)
         return allDoctor.data
     } catch (error) {
@@ -38,7 +36,7 @@ export const getdoctor = createAsyncThunk('doctor/getdoctor', async ({ token, ce
 })
 
 
-export const getAllCenters = createAsyncThunk('center/getAllcenter',async(token,thunkApi)=>{
+export const getAllCenters = createAsyncThunk('center/getAllcenter',async(_,thunkApi)=>{
     try {
         const Allcenters = await api.get(`centerlist`)
         return Allcenters.data;
@@ -47,6 +45,14 @@ export const getAllCenters = createAsyncThunk('center/getAllcenter',async(token,
     }
 })
 
+export const getAllAdmins = createAsyncThunk('center/getAllAdmins',async(_,thunkApi)=>{
+    try {
+        const Allcenters = await api.get(`adminlist`)
+        return Allcenters.data;
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response?.data || error.message)
+    }
+})
 
 const getdropdownSlice = createSlice({
     name: "dropdownoption",
@@ -56,7 +62,8 @@ const getdropdownSlice = createSlice({
         allDoctor: [],
         allCenters:[],
         alltest:[],
-        allTestCategory:[]
+        allTestCategory:[],
+        allAdmins:[],
     },
     reducers: {
 
@@ -108,6 +115,18 @@ const getdropdownSlice = createSlice({
             state.allTestCategory=action.payload.tests;
         })
         .addCase(getAlltestCategorylst.rejected,(state,action)=>{
+            state.loading = false;
+            state.error = action.error;
+        })
+        .addCase(getAllAdmins.pending,(state)=>{
+            state.loading=true;
+            state.error=null;
+        })
+        .addCase(getAllAdmins.fulfilled,(state,action)=>{
+            state.loading=false;
+            state.allAdmins=action.payload.admins;
+        })
+        .addCase(getAllAdmins.rejected,(state,action)=>{
             state.loading = false;
             state.error = action.error;
         })
