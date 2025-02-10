@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PatientDetails from './components/PatientDetails';
 import CaseDetails from './components/CaseDetails';
 import PaymentDetail from './components/PaymentDetail';
+import { handleAddCase } from '../../commonService';
 import Accordian from '../../../libs/Dashboard/components/accordian';
 
 const AddNewCaseModal = ({ isOpen, onClose }) => {
@@ -38,7 +39,8 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    onClose();
+    handleAddCase(formData,onClose);
+    // onClose();,
   };
 
   return isOpen ? (
