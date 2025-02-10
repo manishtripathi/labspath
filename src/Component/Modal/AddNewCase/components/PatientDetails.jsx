@@ -19,14 +19,14 @@ const PatientDetails = ({ formData, onInputChange }) => {
     <section className="mb-6">
       <h3 className="text-lg font-medium text-gray-800 mb-4">Patient Details</h3>
       <div className="flex flex-wrap gap-3">
-        <div className='w-1/5'>
+        <div className='custom-form-width25'>
           <label className="block text-sm font-medium text-gray-600">Title</label>
           <Select
             options={titleOptions}
             onChange={(selected) => onInputChange('title', selected.value)}
           />
         </div>
-        <div className='w-2/6'>
+        <div className='custom-form-width35'>
           <label className="block text-sm font-medium text-gray-600">Name</label>
           <ControlledInput
             type="text"
@@ -35,7 +35,7 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('name', e.target.value)}
           />
         </div>
-        <div className='w-2/6'>
+        <div className='custom-form-width35'>
           <label className="block text-sm font-medium text-gray-600">Age</label>
           <ControlledInput
             type="number"
@@ -44,14 +44,14 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('age', e.target.value)}
           />
         </div>
-        <div className='w-2/6'>
+        <div className='custom-form-width50'>
           <label className="block text-sm font-medium text-gray-600">Gender</label>
           <Select
             options={genderOptions}
             onChange={(selected) => onInputChange('gender', selected.value)}
           />
         </div>
-        <div className='w-2/6'>
+        <div className='custom-form-width50'>
           <label className="block text-sm font-medium text-gray-600">Mobile No.</label>
           <ControlledInput
             type="text"
@@ -60,7 +60,7 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('mobile', e.target.value)}
           />
         </div>
-        <div className='w-2/6'>
+        <div className='custom-form-width50'>
           <label className="block text-sm font-medium text-gray-600">Date of Birth</label>
           <ControlledInput
             type="date"
@@ -69,10 +69,10 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('dob', e.target.value)}
           />
         </div>
-        <div>
+        <div className='custom-form-width50'>
           <label className="block text-sm font-medium text-gray-600">Online Report</label>
-          <div className="flex space-x-2">
-            <label className="flex items-center space-x-1">
+          <div className="flex space-x-2 mt-4">
+            <label className="flex items-start space-x-2">
               <ControlledInput
                 type="checkbox"
                 checked={formData.onlineReport.includes('Email')}
@@ -87,7 +87,7 @@ const PatientDetails = ({ formData, onInputChange }) => {
               />
               <span>Email</span>
             </label>
-            <label className="flex items-center space-x-1">
+            <label className="flex items-start space-x-2">
               <ControlledInput
                 type="checkbox"
                 checked={formData.onlineReport.includes('Address')}

@@ -54,3 +54,16 @@ td {
   font-weight: 500;
   font-family: "Roboto", sans-serif;
 }
+.custom-form-width50{
+  width: 48%;
+}
+.custom-form-width25{
+  width: 23%;
+}
+.custom-form-width35{
+  width: 36%;
+}
+input.controlled-input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
