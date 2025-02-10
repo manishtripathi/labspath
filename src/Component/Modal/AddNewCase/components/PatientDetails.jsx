@@ -18,15 +18,15 @@ const PatientDetails = ({ formData, onInputChange }) => {
   return (
     <section className="mb-6">
       <h3 className="text-lg font-medium text-gray-800 mb-4">Patient Details</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
+      <div className="flex flex-wrap gap-3">
+        <div className='w-1/5'>
           <label className="block text-sm font-medium text-gray-600">Title</label>
           <Select
             options={titleOptions}
             onChange={(selected) => onInputChange('title', selected.value)}
           />
         </div>
-        <div>
+        <div className='w-2/6'>
           <label className="block text-sm font-medium text-gray-600">Name</label>
           <ControlledInput
             type="text"
@@ -35,7 +35,7 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('name', e.target.value)}
           />
         </div>
-        <div>
+        <div className='w-2/6'>
           <label className="block text-sm font-medium text-gray-600">Age</label>
           <ControlledInput
             type="number"
@@ -44,14 +44,14 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('age', e.target.value)}
           />
         </div>
-        <div>
+        <div className='w-2/6'>
           <label className="block text-sm font-medium text-gray-600">Gender</label>
           <Select
             options={genderOptions}
             onChange={(selected) => onInputChange('gender', selected.value)}
           />
         </div>
-        <div>
+        <div className='w-2/6'>
           <label className="block text-sm font-medium text-gray-600">Mobile No.</label>
           <ControlledInput
             type="text"
@@ -60,7 +60,7 @@ const PatientDetails = ({ formData, onInputChange }) => {
             onChange={(e,error) => onInputChange('mobile', e.target.value)}
           />
         </div>
-        <div>
+        <div className='w-2/6'>
           <label className="block text-sm font-medium text-gray-600">Date of Birth</label>
           <ControlledInput
             type="date"
