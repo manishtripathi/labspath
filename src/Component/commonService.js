@@ -4,6 +4,7 @@ import { loginAsAdmin, loginAsDoctor } from "../redux/slices/authSlice"
 import { toastPromise } from "../redux/toastHandler";
 import api from "../redux/apiGateways/apiHandler";
 import { addTest, addTestCategory } from "../libs/services/doctor-action-api";
+import { AddCase } from "../libs/services/center-api";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
     setLoader(true);
@@ -146,5 +147,18 @@ export const handleAddTest = async(data, setDisplayModal, setLoader) =>{
         return toast.success("Center has been successfully added");
     }
 }   
+
+export const handleAddCase = async(data, onClose, setLoader) =>{
+    const res = await AddCase(data);
+    console.log(res)
+    if (res?.status >= 400) {
+        onClose();
+        return toast.error("Error adding Case");
+    } else {
+        onClose();
+        return toast.success("Case has been successfully added");
+    }
+}   
+
 
 export { handleLoginAsDoctor, handleLoginAsAdmin, handleLoginAsSuperAdmin, formReducer }
