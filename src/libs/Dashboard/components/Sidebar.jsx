@@ -178,7 +178,7 @@ const Sidebar = () => {
             ]}
           />
 
-          {user?.role === "superadmin" && (
+          {user?.role === "superAdmin" && (
             <MenuItem
               title={"Super Admin"}
               isActive={activeMenu === "Super Admin"}

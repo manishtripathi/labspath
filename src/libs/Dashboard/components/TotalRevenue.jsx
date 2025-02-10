@@ -15,17 +15,17 @@ export const TotalRevenue = () => {
     labels: ['1', '2', '3', '4', '5'],
     datasets: [
       {
-        label: 'Digital X-Ray',
+        label: '',
         data: [4, 3, 2, 3, 2],
         backgroundColor: '#6B21A8',
       },
       {
-        label: 'Blood Test',
+        label: '',
         data: [2, 3, 4, 2, 3],
         backgroundColor: '#FACC15',
       },
       {
-        label: 'USG',
+        label: '',
         data: [3, 2, 3, 4, 1],
         backgroundColor: '#3B82F6',
       },

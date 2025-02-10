@@ -12,7 +12,7 @@ function TestfoematTable() {
 
           <div>
             <div className="w-full flex justify-center mt-10">
-              <table className="w-11/12 border border-black">
+              <table className="w-11/12 border border-black test-pdf">
                 <tbody>
                   <tr className="border-b">
                     <td className="p-2 font-semibold">Name</td>

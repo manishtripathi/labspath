@@ -57,12 +57,12 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
         <PaymentDetail formData = {formData} onInputChange =  {handleInputChange}/>
 
         {/* Footer Buttons */}
-        <footer className="flex justify-end mt-6">
-          <button className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md mr-4" onClick={onClose}>
-            Cancel
+        <footer className="flex justify-start mt-6">          
+          <button className="px-6 py-2 bg-purple-600 text-white rounded-md mr-4" onClick={handleSubmit}>
+            Create
           </button>
-          <button className="px-6 py-2 bg-purple-600 text-white rounded-md" onClick={handleSubmit}>
-            Submit
+          <button className="px-6 py-2 bg-gray-300 text-gray-700 rounded-md " onClick={onClose}>
+            Cancel
           </button>
         </footer>
       </div>
