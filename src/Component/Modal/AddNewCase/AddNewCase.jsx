@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PatientDetails from './components/PatientDetails';
 import CaseDetails from './components/CaseDetails';
 import PaymentDetail from './components/PaymentDetail';
+import Accordian from '../../../libs/Dashboard/components/accordian';
 
 const AddNewCaseModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -47,15 +48,19 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
           <h2 className="text-xl font-semibold text-gray-700">Add New Case</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">✕</button>
         </header>
-
-        {/* Patient Details Section */}
+        <Accordian title="Patient Details">
+            {/* Patient Details Section */}
         <PatientDetails formData={formData} onInputChange={handleInputChange} />
-
+        </Accordian>
+        
+        <Accordian title="Case Details">
         {/* Case Details Section */}
         <CaseDetails formData={formData} onInputChange={handleInputChange} />
-
-        <PaymentDetail formData = {formData} onInputChange =  {handleInputChange}/>
-
+        </Accordian>
+        <Accordian title="Payment Details">
+        {/* payment details*/}
+          <PaymentDetail formData = {formData} onInputChange =  {handleInputChange}/>
+        </Accordian>
         {/* Footer Buttons */}
         <footer className="flex justify-start mt-6">          
           <button className="px-6 py-2 bg-purple-600 text-white rounded-md mr-4" onClick={handleSubmit}>
