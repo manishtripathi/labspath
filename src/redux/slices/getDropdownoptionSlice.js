@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import api, { GetGateway } from "../apiGateways/apiHandler";
+import { GenerateOption } from "../../Component/commonService";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
@@ -76,7 +77,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getdoctor.fulfilled, (state, action) => {
             state.loading = false;
-            state.allDoctor = action.payload.doctors;
+            state.allDoctor = GenerateOption(action.payload.doctors);
         })
         .addCase(getdoctor.rejected, (state, action) => {
             state.loading = false;
@@ -88,7 +89,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAllCenters.fulfilled,(state,action)=>{
             state.loading=false;
-            state.allCenters=action.payload.centerList;
+            state.allCenters=GenerateOption(action.payload.centerList);
         })
         .addCase(getAllCenters.rejected,(state,action)=>{
             state.loading = false;
@@ -100,7 +101,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAlltest.fulfilled,(state,action)=>{
             state.loading=false;
-            state.alltest=action.payload.tests;
+            state.alltest=GenerateOption(action.payload.tests);
         })
         .addCase(getAlltest.rejected,(state,action)=>{
             state.loading = false;
@@ -112,7 +113,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAlltestCategorylst.fulfilled,(state,action)=>{
             state.loading=false;
-            state.allTestCategory=action.payload.tests;
+            state.allTestCategory=GenerateOption(action.payload.categories);
         })
         .addCase(getAlltestCategorylst.rejected,(state,action)=>{
             state.loading = false;
@@ -124,7 +125,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAllAdmins.fulfilled,(state,action)=>{
             state.loading=false;
-            state.allAdmins=action.payload.admins;
+            state.allAdmins=GenerateOption(action.payload.admins);
         })
         .addCase(getAllAdmins.rejected,(state,action)=>{
             state.loading = false;

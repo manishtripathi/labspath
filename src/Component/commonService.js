@@ -160,5 +160,12 @@ export const handleAddCase = async(data, onClose, setLoader) =>{
     }
 }   
 
+export const GenerateOption = (data) =>{
+    if(!Array.isArray(data))
+    return data;
+    const option = data?.map((item)=>({...item, label:item?.name, value:item?._id}))
+    return option;
+}
+
 
 export { handleLoginAsDoctor, handleLoginAsAdmin, handleLoginAsSuperAdmin, formReducer }
