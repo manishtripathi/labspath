@@ -22,11 +22,11 @@ export const AddDoctor = () => {
         { name: "specialization", type: "text", label: "Specialization", rules: [{ required: true }] },
         { name: "email", type: "text", label: "Email", rules: [{ required: true }] },
         { name: "password", type: "password", label: "Password", rules: [{ required: true }] },
-        { 
-            name: "centerId", type: "select", label: "Center",
-            options: allCenters.map(center => ({ value: center._id, label: center.name })), 
-            rules: [{ required: true }]
-        }
+        // { 
+        //     name: "centerId", type: "select", label: "Center",
+        //     options: allCenters.map(center => ({ value: center._id, label: center.name })), 
+        //     rules: [{ required: true }]
+        // }
     ];
 };
 

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getdoctor } from '../redux/slices/doctorSlice'
 import { useParams } from 'react-router-dom'
 import { useTableList } from './services/useTableList'
+import MainLayout from './Layout/MainLayout'
 const TableList = ({tabledata}) => {
     const actions = (row) =>(
         <div>
@@ -14,9 +15,9 @@ const TableList = ({tabledata}) => {
 
     const {tableData , headers} = useTableList(tabledata);
     return (
-        <div>
+        <MainLayout>
             <TableWithPagination data={tableData} rowsPerPage={6} dataRowHeadingList={headers} actions={actions} />
-        </div>
+        </MainLayout>
     )
 }
 

@@ -1,9 +1,10 @@
 import React from "react";
 //import './testformat.css'
 import "../testformat/testformat.css";
+import MainLayout from "../../libs/Layout/MainLayout";
 function TestfoematTable() {
   return (
-    <>
+    <MainLayout>
       <div>
         <div>
           <div>
@@ -92,7 +93,7 @@ function TestfoematTable() {
           </div>
         </div>
       </div>
-    </>
+    </MainLayout>
   );
 }
 

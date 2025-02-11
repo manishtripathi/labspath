@@ -9,6 +9,8 @@ import Dashboard from './libs/Dashboard/dashboard'
 import Tablepagination from './Component/Tablepagination/Tablepagination'
 import TableList from './libs/TableList'
 import TestfoematTable from './Component/testformat/TestfoematTable'
+import CaseDetails from './Component/Modal/AddNewCase/components/CaseDetails'
+import CaseDetailForm from './Component/Forms/caseDetailForm'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +24,7 @@ function App() {
         <Route path='/table' element= {<Tablepagination/>}></Route>
         <Route path ='/list/:listName' element={<TableList/>}/>
         <Route path ='/test-table' element={<TestfoematTable/>}/>
+        <Route path ='/case-detail/:id' element={<CaseDetailForm/>}/>
       </Routes>
     </>
   )

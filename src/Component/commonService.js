@@ -93,7 +93,7 @@ const formReducer = (state, action) => {
 export const handleAddDoctor = async (data, setDisplayModal, navigate, token, setLoader) => {
     console.log("data for adding doctor", data);
     debugger
-    const res = await api.post(`/api/add-doctor`, data, {
+    const res = await api.post(`add-doctor`, data, {
         headers: {
             Authorization: `Bearer ${token}`
         }
