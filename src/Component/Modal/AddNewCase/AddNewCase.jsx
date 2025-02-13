@@ -24,6 +24,7 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
     isOutsourceLab: false,
     recommendedTest: [],
     paid: '',
+    referee:[],
     discount: '',
     balance: '',
     mode: '',
@@ -43,6 +44,13 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
     // onClose();,
   };
 
+  const handleAddNewReferee = () =>{
+    setFormData((pre)=>{
+      const updatedreferee = pre.referee?.length>0 ? pre.referee.push({title:"", name:"", degree:"", mobileNo:"", email:""}): [{title:"", name:"", degree:"", mobileNo:"", email:""}];
+      return {...pre, referee:updatedreferee}
+    })
+  }
+
   return isOpen ? (
     <div className="fixed z-20 inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
       <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 overflow-y-scroll custom-height-popup">
@@ -57,7 +65,7 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
         
         <Accordian title="Case Details">
         {/* Case Details Section */}
-        <CaseDetails formData={formData} onInputChange={handleInputChange} />
+        <CaseDetails formData={formData} onInputChange={handleInputChange} handleAddNewReferee = {handleAddNewReferee}/>
         </Accordian>
         <Accordian title="Payment Details">
         {/* payment details*/}

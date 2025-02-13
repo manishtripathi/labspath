@@ -13,7 +13,6 @@ import CaseDetails from './Component/Modal/AddNewCase/components/CaseDetails'
 import CaseDetailForm from './Component/Forms/caseDetailForm'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>

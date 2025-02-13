@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 
+*{
+    scrollbar-width: none;
+    scrollbar-color: transparent;
+}
