@@ -1,0 +1,1 @@
+export const GET_CASE_BY_ID = '/cases'

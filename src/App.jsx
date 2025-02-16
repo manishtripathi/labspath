@@ -23,7 +23,7 @@ function App() {
         <Route path='/table' element= {<Tablepagination/>}></Route>
         <Route path ='/list/:listName' element={<TableList/>}/>
         <Route path ='/test-table' element={<TestfoematTable/>}/>
-        <Route path ='/case-detail/:id' element={<CaseDetailForm/>}/>
+        <Route path ='/case-details/:id' element={<CaseDetailForm/>}/>
       </Routes>
     </>
   )

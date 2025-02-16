@@ -1,11 +1,54 @@
-import React from "react";
+import React, { useRef } from "react";
 //import './testformat.css'
 import "../testformat/testformat.css";
 import MainLayout from "../../libs/Layout/MainLayout";
+import { FiUploadCloud } from "react-icons/fi";
 function TestfoematTable() {
+  const pdfRef = useRef();
+
+  const handlePrint = () => {
+    const printWindow = window.open("", "_blank", "width=600,height=800");
+
+    if (printWindow && pdfRef.current) {
+        const htmlContent = pdfRef.current.outerHTML;
+        
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>Print</title>
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+                <style>
+                    @media print {
+                        body {
+                            margin: 0;
+                            padding: 20px;
+                        }
+                    }
+                </style>
+            </head>
+            <body class="p-5">
+                ${htmlContent}
+            </body>
+            </html>
+        `);
+
+        printWindow.document.close();
+        printWindow.focus();
+
+        // Wait for the new window to load styles before printing
+        setTimeout(() => {
+            printWindow.print();
+            printWindow.close();
+        }, 500);
+    } else {
+        alert("Error printing document");
+    }
+};
+
+
   return (
     <MainLayout>
-      <div>
+      <div ref={pdfRef}>
         <div>
           <div>
             <h1 className="px-5 py2 bg-yellow-500 ">Dr Lal Pathlab</h1>
@@ -93,6 +136,11 @@ function TestfoematTable() {
           </div>
         </div>
       </div>
+    <div className="flex justify-center mt-8 p-6">
+      <button
+      title="Download PDF" 
+      className="text-end text-white bg-black" onClick={()=>handlePrint()}><FiUploadCloud size={50}/></button>
+    </div>
     </MainLayout>
   );
 }

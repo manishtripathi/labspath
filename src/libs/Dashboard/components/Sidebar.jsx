@@ -30,6 +30,7 @@ const Sidebar = () => {
   const [displayModal, setDisplayModal] = useState(false);
   const [activeFields, setActiveFields] = useState(null);
   const [activeModal, setActiveModal] = useState(null);
+  const [ loader, setLoader] = useState(false);
   const { user, token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   console.log(user);
@@ -39,7 +40,7 @@ const Sidebar = () => {
   const handleSubmit = (data) => {
     // console.log(data);
     if (activeModal === "doctor") {
-      handleAddDoctor(data, setDisplayModal, navigate, token);
+      handleAddDoctor(data, setDisplayModal, setLoader);
     } else if (activeModal === "center") {
       console.log(data);
       handleAddcenter(data, setDisplayModal, token);

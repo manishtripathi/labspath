@@ -4,10 +4,12 @@ import CaseDetails from './components/CaseDetails';
 import PaymentDetail from './components/PaymentDetail';
 import { handleAddCase } from '../../commonService';
 import Accordian from '../../../libs/Dashboard/components/accordian';
+import { useNavigate } from 'react-router-dom';
 
 const AddNewCaseModal = ({ isOpen, onClose }) => {
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: '',
     name: '',
     age: '',
     gender: '',
@@ -20,11 +22,10 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
     onlineReport: [],
     referredBy: '',
     collectionCenter: '',
-    collectedBy: '',
+    sampleCollectedBy: '',
     isOutsourceLab: false,
-    recommendedTest: [],
+    recommendedTests: [],
     paid: '',
-    referee:[],
     discount: '',
     balance: '',
     mode: '',
@@ -40,7 +41,7 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
-    handleAddCase(formData,onClose);
+    handleAddCase(formData,onClose, navigate);
     // onClose();,
   };
 

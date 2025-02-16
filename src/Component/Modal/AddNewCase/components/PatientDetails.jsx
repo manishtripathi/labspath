@@ -5,11 +5,11 @@ import ControlledInput from '../../../ControlledComponents/controlledInput';
 const PatientDetails = ({ formData, onInputChange,  }) => {
 const [checkFormData, setCheckFormData] = useState({onlineReport:[]})
   
-  const titleOptions = [
-    { value: 'Mr', label: 'Mr' },
-    { value: 'Ms', label: 'Ms' },
-    { value: 'Mrs', label: 'Mrs' },
-  ];
+  // const titleOptions = [
+  //   { value: 'Mr', label: 'Mr' },
+  //   { value: 'Ms', label: 'Ms' },
+  //   { value: 'Mrs', label: 'Mrs' },
+  // ];
 
   const genderOptions = [
     { value: 'Male', label: 'Male' },
@@ -37,13 +37,13 @@ const handleCheckboxChange = (option) =>{
     <section className="mb-6">
       <h3 className="text-lg font-medium text-gray-800 mb-4">Patient Details</h3>
       <div className="flex flex-wrap gap-3">
-        <div className='custom-form-width25'>
+        {/* <div className='custom-form-width25'>
           <label className="block text-sm font-medium text-gray-600">Title</label>
           <Select
             options={titleOptions}
             onChange={(selected) => onInputChange('title', selected.value)}
           />
-        </div>
+        </div> */}
         <div className='custom-form-width35'>
           <label className="block text-sm font-medium text-gray-600">Name</label>
           <ControlledInput

@@ -14,7 +14,6 @@ export const loginFields = () => [
 ];
 
 export const AddDoctor = () => {
-     debugger
     const allCenters = store.getState().dropDownOptions.allCenters || [];
 
     return [

@@ -4,7 +4,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null; // Render nothing if the modal is closed
 
   return (
-    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center" style={{zIndex:"9"}}>
       {/* Modal Container */}
       <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6 overflow-y-scroll custom-height-popup relative">
         {/* Close Button */}
