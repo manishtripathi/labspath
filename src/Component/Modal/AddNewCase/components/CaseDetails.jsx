@@ -5,7 +5,7 @@ import ControlledSelect from '../../../ControlledComponents/controlledSelect';
 import { useSelector } from 'react-redux';
 import Modal from '../../ModalPopUp';
 
-const CaseDetails = ({ formData, onInputChange,handleAddNewReferee }) => {
+const CaseDetails = ({ formData, onInputChange, setFormData }) => {
   
   const { allCenters,allTestCategory , allDoctor,alltest,allAdmins} = useSelector(state => state.dropDownOptions) 
   const testOptions = [
@@ -20,16 +20,34 @@ const titleOptions = [
     { value: 'Mrs', label: 'Mrs' },
   ];
 
+
+  const [referee, setReferee] = useState();
+
+
+    const handleAddNewReferee = () =>{
+      const {title, name, email, mobileNo, degree} = referee
+    setFormData((pre)=>{
+      const updatedreferee = pre.referee?.length>0 ? pre.referee.push({title, name, degree, mobileNo, email}): [{title, name, degree, mobileNo, email}];
+      return {...pre, referee:updatedreferee}
+    })
+  }
+
+  const refereeInputChange =(param, value)=>{
+    setReferee((pre)=>({...pre, [param]:value}))
+  }
+
   return (
     <section>
       <div className="flex justify-between">
         <Modal isOpen={showModal} onClose={()=>setShowModal(false) } title={"Add New Referee"}>
           <div className='flex flex-wrap justify-around'>
-          <ControlledSelect options={titleOptions} onChange={onInputChange} name="title" label={"title"} className='w-2/12'/>
-          <ControlledInput type='text' onChange={onInputChange} name="name" label={"Name"} className='md:w-4/12 w-full'/>
-          <ControlledInput type='text' onChange={onInputChange} name="degree" label={"Degree"} className='md:w-4/12 w-full'/>
-          <ControlledInput type='text' onChange={onInputChange} name="mobileNo" label={"Mobile No"} className='md:w-4/12 w-full'/>
-          <ControlledInput type='text' onChange={onInputChange} name="email" label={"Email"} className='md:w-4/12 w-full'/>
+          <ControlledSelect options={titleOptions} onChange={(e)=>refereeInputChange("title", e.target.value)} name="title" label={"title"} className='w-2/12'/>
+          <ControlledInput type='text' onChange={(e)=>refereeInputChange("name", e.target.value)} name="name" label={"Name"} className='md:w-4/12 w-full'/>
+          <ControlledInput type='text' onChange={(e)=>refereeInputChange("degree", e.target.value)} name="degree" label={"Degree"} className='md:w-4/12 w-full'/>
+          <ControlledInput type='text' onChange={(e)=>refereeInputChange("mobileNo", e.target.value)} name="mobileNo" label={"Mobile No"} className='md:w-4/12 w-full'/>
+          <ControlledInput type='text' onChange={(e)=>refereeInputChange("Email", e.target.value)} name="email" label={"Email"} className='md:w-4/12 w-full'/>
+
+            <button className=" px-4 py-2 rounded-md bg-green-600 hover:bg-green-400 text-white" onClick= {()=>handleAddNewReferee()}>Submit</button>
           {/* <ControlledInput type='text' onChange={onInputChange} name="title" className='md:w-4/12 w-full'/> */}
           </div>
         </Modal>

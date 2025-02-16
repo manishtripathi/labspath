@@ -150,7 +150,11 @@ export const handleAddAdmin = async (data, setDisplayModal, setLoader) => {
 
 
 export const handleAddTestCategory = async(data, setDisplayModal, setLoader) =>{
-    const res = await addTestCategory(data);
+    const payload = structuredClone(data);
+    payload.centerId = "67aa2f639964247a542da696"
+    console.log("payload->",payload)
+    const res = await addTestCategory(payload);
+
     console.log(res)
     if (res?.status >= 400) {
         setDisplayModal(false)
@@ -162,7 +166,9 @@ export const handleAddTestCategory = async(data, setDisplayModal, setLoader) =>{
 }   
 
 export const handleAddTest = async(data, setDisplayModal, setLoader) =>{
-    const res = await addTest(data);
+    const payload = structuredClone(data);
+    payload.centerId = "67aa2f639964247a542da696"
+    const res = await addTest(payload);
     console.log(res)
     if (res?.status >= 400) {
         setDisplayModal(false)
@@ -188,7 +194,8 @@ export const handleAddCase = async(data, onClose, setLoader) =>{
 export const GenerateOption = (data) =>{
     if(!Array.isArray(data))
     return data;
-    const option = data?.map((item)=>({...item, label:item?.name, value:item?._id}))
+    const option = data?.map((item)=>({...item, label:item?.name || item?.testName, value:item?._id}))
+    console.log(option)
     return option;
 }
 

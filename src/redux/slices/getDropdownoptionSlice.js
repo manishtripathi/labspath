@@ -101,7 +101,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAlltest.fulfilled,(state,action)=>{
             state.loading=false;
-            state.alltest=GenerateOption(action.payload.tests);
+            state.alltest=GenerateOption(action.payload.tests?.[0]?.test);
         })
         .addCase(getAlltest.rejected,(state,action)=>{
             state.loading = false;
@@ -113,7 +113,7 @@ const getdropdownSlice = createSlice({
         })
         .addCase(getAlltestCategorylst.fulfilled,(state,action)=>{
             state.loading=false;
-            state.allTestCategory=GenerateOption(action.payload.categories);
+            state.allTestCategory=GenerateOption(action.payload.tests?.[0]?.testCategories);
         })
         .addCase(getAlltestCategorylst.rejected,(state,action)=>{
             state.loading = false;
