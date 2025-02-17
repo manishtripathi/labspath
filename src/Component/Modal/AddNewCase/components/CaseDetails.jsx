@@ -16,6 +16,7 @@ const CaseDetails = ({ formData, onInputChange, setFormData }) => {
 
   const [referee, setReferee] = useState({title:"", name:"", email:"", mobileNo:"", degree:""});
   const [activeReferee, setActiveReferee] = useState(0);
+  const [showModal,setShowModal] = useState(false)
 
 
   //   const handleAddNewReferee = () =>{
