@@ -2,9 +2,24 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import ControlledInput from '../../../ControlledComponents/controlledInput';
 
-const PatientDetails = ({ formData, onInputChange,  }) => {
-const [checkFormData, setCheckFormData] = useState({onlineReport:[]})
-  
+const PatientDetails = ({ formData, onInputChange, }) => {
+  const [checkFormData, setCheckFormData] = useState({ onlineReport: [] })
+
+  const [showEmailField, setShowEmailField] = useState(false);
+  const [showAadharField, setShowAadharField] = useState(false);
+
+  const handleCheckboxChange = (value) => {
+    setCheckFormData((prev) => {
+      const isChecked = prev.onlineReport.includes(value);
+      const updatedOnlineReport = isChecked
+        ? prev.onlineReport.filter((item) => item !== value)
+        : [...prev.onlineReport, value];
+      if (value === "Email") setShowEmailField(!isChecked);
+      if (value === "Address") setShowAadharField(!isChecked);
+
+      return { ...prev, onlineReport: updatedOnlineReport };
+    });
+  };
   // const titleOptions = [
   //   { value: 'Mr', label: 'Mr' },
   //   { value: 'Ms', label: 'Ms' },
@@ -24,15 +39,15 @@ const [checkFormData, setCheckFormData] = useState({onlineReport:[]})
     }))
   }
 
-const handleCheckboxChange = (option) =>{
-  setCheckFormData((prev)=> {
-    const updatedReport = prev.onlineReport.includes(option) ? prev.onlineReport.filter((item)=> item !== option) : [...prev.onlineReport, option];
+  // const handleCheckboxChange = (option) =>{
+  //   setCheckFormData((prev)=> {
+  //     const updatedReport = prev.onlineReport.includes(option) ? prev.onlineReport.filter((item)=> item !== option) : [...prev.onlineReport, option];
 
-    return {...prev, onlineReport: updatedReport}
+  //     return {...prev, onlineReport: updatedReport}
 
-  })
+  //   })
 
-}
+  // }
   return (
     <section className="mb-6">
       <h3 className="text-lg font-medium text-gray-800 mb-4">Patient Details</h3>
@@ -44,16 +59,25 @@ const handleCheckboxChange = (option) =>{
             onChange={(selected) => onInputChange('title', selected.value)}
           />
         </div> */}
-        <div className='custom-form-width35'>
-          <label className="block text-sm font-medium text-gray-600">Name</label>
+        <div className='custom-form-width50'>
+          <label className="block text-sm font-medium text-gray-600">First Name</label>
           <ControlledInput
             type="text"
             className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-purple-300"
-            value={formData.name}
-            onChange={(e, error) => onInputChange('name', e.target.value)}
+            value={formData.fname}
+            onChange={(e, error) => onInputChange('fname', e.target.value)}
           />
         </div>
-        <div className='custom-form-width35'>
+        <div className='custom-form-width50'>
+          <label className="block text-sm font-medium text-gray-600">Last Name</label>
+          <ControlledInput
+            type="text"
+            className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-purple-300"
+            value={formData.lname}
+            onChange={(e, error) => onInputChange('lname', e.target.value)}
+          />
+        </div>
+        <div className='custom-form-width50'>
           <label className="block text-sm font-medium text-gray-600">Age</label>
           <ControlledInput
             type="number"
@@ -87,58 +111,62 @@ const handleCheckboxChange = (option) =>{
             onChange={(e, error) => onInputChange('dob', e.target.value)}
           />
         </div>
-        <div className='custom-form-width50'>
-          <label className="block text-sm font-medium text-gray-600">Online Report</label>
+        <div className="custom-form-width50">
+          <label className="block text-sm font-medium text-gray-600">
+            Online Report
+          </label>
           <div className="flex space-x-2 mt-4 gap-4">
-            {/* <label className="flex items-start space-x-2">
-              <ControlledInput
-                type="checkbox"
-                checked={formData.onlineReport.includes('Email')}
-                onChange={(e) =>
-                  onInputChange(
-                    'onlineReport',
-                    e.target.checked
-                      ? [...formData.onlineReport, 'Email']
-                      : formData.onlineReport.filter((item) => item !== 'Email')
-                  )
-                }
-              />
-              <span>Email</span>
-            </label> */}
             <label className="flex items-start space-x-2">
               <ControlledInput
                 type="checkbox"
-                checked={checkFormData.onlineReport.includes('Email')}
+                checked={checkFormData.onlineReport.includes("Email")}
                 onChange={() => handleCheckboxChange("Email")}
               />
               <span>Email</span>
             </label>
-            {/* <label className="flex items-start space-x-2">
-              <ControlledInput
-                type="checkbox"
-                checked={formData.onlineReport.includes('Address')}
-                onChange={(e) =>
-                  onInputChange(
-                    'onlineReport',
-                    e.target.checked
-                      ? [...formData.onlineReport, 'Address']
-                      : formData.onlineReport.filter((item) => item !== 'Address')
-                  )
-                }
-              />
-              <span>Address</span>
-            </label> */}
+
             <label className="flex items-start space-x-2">
               <ControlledInput
                 type="checkbox"
-                checked={checkFormData.onlineReport.includes('Address')}
+                checked={checkFormData.onlineReport.includes("Address")}
                 onChange={() => handleCheckboxChange("Address")}
               />
               <span>Address</span>
             </label>
           </div>
-        </div>
-      </div>
+          
+         </div>
+         <div className="custom-form-width50"></div>
+        
+           {showEmailField && (
+            <div className="custom-form-width50">
+              <label className="block text-sm font-medium text-gray-600">
+                Email Address
+              </label>
+              <ControlledInput
+               type="email" 
+               placeholder="Enter Email"
+               className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-purple-300" 
+               value={formData.email}
+               onChange={(e, error) => onInputChange('email', e.target.value)}
+               />
+            </div>
+          )}
+          {showAadharField && (
+            <div className="custom-form-width50">
+              <label className="block text-sm font-medium text-gray-600">
+                Aadhaar Number
+              </label>
+              <ControlledInput type="Number" 
+               placeholder="Enter Aadhaar Number"
+               className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-purple-300" 
+               value={formData.aadhar}
+               onChange={(e, error) => onInputChange('aadhar', e.target.value)}
+               />
+            </div>
+          )}
+         </div>
+       
     </section>
   );
 };

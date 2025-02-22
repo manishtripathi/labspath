@@ -10,7 +10,8 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
+    fname: '',
+    lname: '',
     age: '',
     gender: '',
     mobile: '',
