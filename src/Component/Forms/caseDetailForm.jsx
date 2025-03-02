@@ -4,15 +4,17 @@ import "../testformat/testformat.css";
 import MainLayout from "../../libs/Layout/MainLayout";
 import { useLocation, useParams } from "react-router-dom";
 import { getCaseById } from "../../libs/services/admin-api";
-import { FiUploadCloud } from "react-icons/fi";
-
-
-
+import { FiDownload, FiShare2, FiUploadCloud } from "react-icons/fi";
+import { EmailShareButton, LinkedinShareButton, WhatsappShareButton } from "react-share";
+import { FaWhatsapp, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import html2pdf from "html2pdf.js";
 
 function CaseDetailForm() {
   const { id } = useParams();
   const patient = useLocation()?.state?.patient
   const pdfRef = useRef();
+  const [showShareOptions, setShowShareOptions] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("");
   const handlePrint = () => {
     const printWindow = window.open("", "_blank", "width=600,height=800");
 
@@ -95,6 +97,23 @@ function CaseDetailForm() {
     }
   }, [id, patient])
 
+
+  const generateAndSharePDF = () => {
+    if (!pdfRef.current) return;
+  
+    html2pdf()
+      .from(pdfRef.current)
+      .outputPdf("blob")
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        setPdfUrl(url);
+      })
+      .catch((error) => {
+        console.error("Error generating PDF:", error);
+      });
+  };
+  
+
   return (
     <MainLayout>
       <div ref={pdfRef}>
@@ -151,7 +170,7 @@ function CaseDetailForm() {
         </div>
       </div>
 
-      {editableMode ? <div className="flex justify-center">
+      {/* {editableMode ? <div className="flex justify-center">
         <div className="w-11/12 flex justify-end mt-2">
           <button className="min-w-max px-6 py-2 bg-green-600 rounded-sm" onClick={() => GenerateReport()}> Generate</button>
         </div>
@@ -159,8 +178,68 @@ function CaseDetailForm() {
         <div className="flex justify-center mt-8 p-6">
           <button
             title="Download PDF"
-            className="text-end text-white bg-black" onClick={() => handlePrint()}><FiUploadCloud size={50} /></button>
-        </div>}
+            className="text-end text-white bg-black" onClick={() => handlePrint()}><FiDownload size={50} /></button>
+        </div>} */}
+        {editableMode ? (
+        <div className="flex justify-center">
+          <div className="w-11/12 flex justify-end mt-2">
+            <button
+              className="min-w-max px-6 py-2 bg-green-600 rounded-sm hover:bg-green-700 transition-all"
+              onClick={() => GenerateReport()}
+            >
+              Generate
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="flex justify-center mt-8 p-6 gap-4">
+          {/* Download Button */}
+          <button
+            title="Download PDF"
+            className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-all"
+            onClick={handlePrint}
+          >
+            <FiDownload size={24} />
+            <span className="hidden md:inline">Download</span>
+          </button>
+
+          <div className="relative">
+            <button
+              title="Share PDF"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+              onClick={generateAndSharePDF}
+            >
+              <FiShare2 size={24} />
+              <span className="hidden md:inline">Share</span>
+            </button>
+
+            {pdfUrl && (
+              <div className="absolute right-0 mt-2 bg-white border rounded-lg shadow-lg p-2 flex flex-col w-40">
+                <WhatsappShareButton url={pdfUrl} className="w-full">
+                  <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
+                    <FaWhatsapp size={20} className="text-green-600" />
+                    WhatsApp
+                  </div>
+                </WhatsappShareButton>
+
+                <EmailShareButton url={pdfUrl} subject="PDF File" body="Download it here: " className="w-full">
+                  <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
+                    <FaEnvelope size={20} className="text-red-600" />
+                    Email
+                  </div>
+                </EmailShareButton>
+
+                <LinkedinShareButton url={pdfUrl} className="w-full">
+                  <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100">
+                    <FaLinkedin size={20} className="text-blue-600" />
+                    LinkedIn
+                  </div>
+                </LinkedinShareButton>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 }
