@@ -58,7 +58,7 @@ const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
 const handleLoginAsSuperAdmin = (data, dispatch, navigate, setLoader) => {
     setLoader(true);
     dispatch(loginAsDoctor(data)).then((res) => {
-        debugger
+         
         
         if (res?.status >= 400 || !res?.payload?.token) {
             toast.error(res?.payload?.message || "Error Logging in ")
@@ -100,7 +100,7 @@ export const handleAddDoctor = async (data, setDisplayModal, setLoader) => {
     {setLoader && setLoader(true)}
     console.log("status", res?.status)
     if (res?.status >= 400) {
-        debugger
+         
         setDisplayModal(false)
         {setLoader && setLoader(false)}
         return toast.error("Error adding doctor");

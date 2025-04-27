@@ -25,7 +25,7 @@ import getDropDownSlice from './slices/getDropdownoptionSlice'
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"], // Persist only the auth slice
+  whitelist: ["auth","dropdownOptions"], 
 };
 
 const rootReducer = combineReducers({

@@ -120,7 +120,7 @@ const Sidebar = () => {
           />
                <MenuItem
             title="All Doctors"
-            toggleMenu={() => navigate("/list/doctor")}
+            toggleMenu={() => navigate("/list/doctors")}
             
           />
 
@@ -194,7 +194,7 @@ const Sidebar = () => {
               },
               {
                 label: "All Doctor",
-                actions: () => handleListSelect("doctor"),
+                actions: () => handleListSelect("doctors"),
               },
               { label: "Permissions", actions: {} },
             ]}
@@ -216,11 +216,11 @@ const Sidebar = () => {
                 },
                 {
                   label: "All Centers",
-                  actions: () => handleListSelect("center"),
+                  actions: () => handleListSelect("centers"),
                 },
                 {
                   label: "All Admin",
-                  actions: () => handleListSelect("admin"),
+                  actions: () => handleListSelect("admins"),
                 },
               ]}
             />

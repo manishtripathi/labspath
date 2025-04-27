@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { DotLoader } from 'react-spinners'
+import CenterList from './Pages/CenterList'
 
 // Lazy load components
 const Login = lazy(() => import('./Pages/useraccount/Login'))
@@ -23,6 +24,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/table' element={<Tablepagination />} />
           <Route path='/list/:listName' element={<TableList />} />
+          <Route path='/centers' element={<CenterList />} />
           <Route path='/test-table' element={<TestfoematTable />} />
           <Route path='/case-details/:id' element={<CaseDetailForm />} />
         </Routes>

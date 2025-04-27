@@ -48,8 +48,8 @@ export const getAllCenters = createAsyncThunk('center/getAllcenter',async(_,thun
 
 export const getAllAdmins = createAsyncThunk('center/getAllAdmins',async(_,thunkApi)=>{
     try {
-        const Allcenters = await api.get(`adminlist`)
-        return Allcenters.data;
+        const Alladmins = await api.get(`adminlist`)
+        return Alladmins.data;
     } catch (error) {
         return thunkApi.rejectWithValue(error.response?.data || error.message)
     }
@@ -57,8 +57,8 @@ export const getAllAdmins = createAsyncThunk('center/getAllAdmins',async(_,thunk
 
 export const getAllCases = createAsyncThunk('center/getAllCases',async(_,thunkApi)=>{
     try {
-        const Allcenters = await api.get(`cases`)
-        return Allcenters.data;
+        const Allcases = await api.get(`cases`)
+        return Allcases.data;
     } catch (error) {
         return thunkApi.rejectWithValue(error.response?.data || error.message)
     }

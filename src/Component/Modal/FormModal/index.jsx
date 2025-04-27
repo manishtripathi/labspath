@@ -78,6 +78,7 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
 
             if (field.type === "select") {
                 return (
+                    <div className="w-5/12">
                     <ControlledSelect
                         key={fieldName}
                         options={field.options || []}
@@ -92,9 +93,11 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
                         rules={ field.rules}
                         {...field.props}
                     />
+                    </div>
                 );
             } else if (field.type === "password") {
                 return (
+                    <div className="w-5/12">
                     <ControlledPassword
                         key={fieldName}
                         name={field.name}
@@ -106,9 +109,11 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
                         rules={ field.rules}
                         {...field.props}
                     />
+                    </div>
                 );
             } else if (field.type === "file") {
                 return (
+                    <div className="w-5/12">
                     <ControlledInputFile
                         key={fieldName}
                         name={field.name}
@@ -119,13 +124,14 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
                         rules={ field.rules}
                         {...field.props}
                     />
+                    </div>
                 );
             } else if (field.type === "array") {
                 return (
-                    <div key={field.name} className="border p-2">
+                    <div key={field.name} className="border p-2 w-full">
                         <label>{field.label}</label>
                         {(Array.isArray(fieldValue) ? fieldValue : []).map((_, idx) => (
-                            <div key={idx} className="flex gap-2 items-center">
+                            <div key={idx} className="flex flex-wrap justify-between items-center">
                                 {renderFields(field.fields, field.name, idx)}
                                 <button type="button" className="text-red-500" onClick={() => removeRow(field.name, idx)}>Remove</button>
                             </div>
@@ -135,6 +141,7 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
                 );
             } else {
                 return (
+                    <div className="w-5/12">
                     <ControlledInput
                         key={fieldName}
                         name={field.name}
@@ -146,6 +153,7 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
                         rules={ field.rules}
                         {...field.props}
                     />
+                    </div>
                 );
             }
         });
@@ -182,7 +190,7 @@ const FormModal = ({ fields, onSubmit, showModal, onClose }) => {
     return (
         <Modal isOpen={showModal} onClose={onClose}>
             <form className="p-4" onSubmit={handleSubmit}>
-                <div className="w-full grid grid-cols-2 gap-4">
+                <div className="w-full flex flex-wrap gap-4">
                     {renderFields(fields)}
                 </div>
                 <button className="w-max px-6 py-2 rounded-lg bg-green-600 text-white mt-4">Submit</button>
