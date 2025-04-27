@@ -14,7 +14,7 @@ const MenuItem = ({ title, icon, isActive, toggleMenu, subMenu = [] }) => {
           {icon}
           {title}
         </span>
-        <span className="text-gray-500">{isActive ? <FiChevronDown /> : <FiChevronRight />}</span>
+   {  subMenu.length > 0 &&    <span className="text-gray-500">{isActive ? <FiChevronDown /> : <FiChevronRight />}</span>}
       </button>
       {isActive && subMenu.length > 0 && (
         <div className="ml-8 mt-2">

@@ -15,7 +15,6 @@ const TableWithPagination = ({
   const [activeValue, setActivevalue] = useState([]);
   const [isShowModel, setShowModel] = useState(false);
   const totalPages = Math.ceil(data.length / rowsPerPage);
-
   const handleChangePage = (direction) => {
     if (direction === "next" && currentPage < totalPages) {
       setCurrentPage((prev) => prev + 1);
@@ -69,6 +68,8 @@ const TableWithPagination = ({
                       <button onClick={() => handleViewMore(value)}>
                         View More
                       </button>
+                    ) : typeof value === "object" && value !== null ? (
+                      JSON.stringify(value)
                     ) : (
                       value
                     )}

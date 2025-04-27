@@ -9,17 +9,17 @@ export const useTableList = (tabledata) =>{
     const {listName} = useParams()
     const [tableData, setTableData] = useState(tabledata || [])
     const [headers, setHeaders] = useState([]);
-    console.log(listName)
     const { token,user } = useSelector(store => store.auth)
     const dropdownoptions = useSelector(state =>state.dropDownOptions)
-    const centerId = "679a57d1c8a76dff3665773e"
 
     useEffect(() => {
+        console.log('from useTableList1', tableData);
         if(!tabledata && token)
-        getTableListData(listName, dispatch, setTableData, dropdownoptions)
-    }, [token])
+        getTableListData(listName, dispatch, setTableData, dropdownoptions, )
+    }, [token, listName])
 
     useEffect(()=>{
+        console.log('from useTableList', tableData);
         if(tableData?.length > 0){
             const headerRow = Object.keys(tableData[0]);
             setHeaders(headerRow)

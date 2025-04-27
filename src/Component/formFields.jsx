@@ -40,7 +40,7 @@ export const AddAdminFields = () => {
     return [
         { name: "name", type: "text", label: "Name", rules: [{ required: true }] },
         { name: "email", type: "text", label: "Email", rules: [{ required: true }] },
-        { name: "role", type: "text", label: "Role", rules: [{ required: true }] },
+        // { name: "role", type: "text", label: "Role", rules: [{ required: true }] },
         { name: "password", type: "password", label: "Password", rules: [{ required: true }] },
         { 
             name: "centerId", type: "select", label: "Center",

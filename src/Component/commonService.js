@@ -98,14 +98,16 @@ export const handleAddDoctor = async (data, setDisplayModal, setLoader) => {
     console.log("data for adding doctor", payload);
     const res = await api.post(`add-doctor`, payload);
     {setLoader && setLoader(true)}
-    console.log(res)
+    console.log("status", res?.status)
     if (res?.status >= 400) {
+        debugger
         setDisplayModal(false)
         {setLoader && setLoader(false)}
         return toast.error("Error adding doctor");
     } else {
         setDisplayModal(false)
         {setLoader && setLoader(false)}
+
         return toast.success("Dcotor has been successfully added");
     }
     

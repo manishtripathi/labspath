@@ -7,3 +7,9 @@
     scrollbar-width: none;
     scrollbar-color: transparent;
 }
+.loading-route{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

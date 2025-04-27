@@ -55,6 +55,16 @@ export const getAllAdmins = createAsyncThunk('center/getAllAdmins',async(_,thunk
     }
 })
 
+export const getAllCases = createAsyncThunk('center/getAllCases',async(_,thunkApi)=>{
+    try {
+        const Allcenters = await api.get(`cases`)
+        return Allcenters.data;
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.response?.data || error.message)
+    }
+})
+
+
 const getdropdownSlice = createSlice({
     name: "dropdownoption",
     initialState: {
@@ -65,6 +75,7 @@ const getdropdownSlice = createSlice({
         alltest:[],
         allTestCategory:[],
         allAdmins:[],
+        allCases:[]
     },
     reducers: {
 
@@ -128,6 +139,18 @@ const getdropdownSlice = createSlice({
             state.allAdmins=GenerateOption(action.payload.admins);
         })
         .addCase(getAllAdmins.rejected,(state,action)=>{
+            state.loading = false;
+            state.error = action.error;
+        })
+        .addCase(getAllCases.pending,(state)=>{
+            state.loading=true;
+            state.error=null;
+        })
+        .addCase(getAllCases.fulfilled,(state,action)=>{
+            state.loading=false;
+            state.allCases=GenerateOption(action.payload.cases);
+        })
+        .addCase(getAllCases.rejected,(state,action)=>{
             state.loading = false;
             state.error = action.error;
         })

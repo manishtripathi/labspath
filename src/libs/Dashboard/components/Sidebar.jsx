@@ -87,7 +87,7 @@ const Sidebar = () => {
           onClose={() => setDisplayModal(false)}
         />
       )}
-      <div className="w-64 custom-sidebarbg h-screen shadow-lg">
+      <div className="w-64 custom-sidebarbg h-screen shadow-lg overflow-auto">
         <AddNewCaseModal
           isOpen={addNewCase}
           onClose={() => setAddNewCase(false)}
@@ -95,7 +95,7 @@ const Sidebar = () => {
 
         <div className="p-4 border-gray-300">
           <div className="flex items-center gap-2">
-            <img src={Dlogo} alt="Lab Smart Logo" className="" />
+            <img src={Dlogo} alt="Path LIS Logo" className="" />
           </div>
           <div className="dots">
             <img src={Dots} className="dots-img " alt="dots" />
@@ -112,8 +112,18 @@ const Sidebar = () => {
           <MenuItem
             title="Dashboard"
             isActive={activeMenu === "Dashboard"}
-            toggleMenu={() => toggleMenu("Dashboard")}
+            toggleMenu={() => navigate("/dashboard")}
           />
+             <MenuItem
+            title="All Cases"
+            toggleMenu={() => navigate("/list/cases")}
+          />
+               <MenuItem
+            title="All Doctors"
+            toggleMenu={() => navigate("/list/doctor")}
+            
+          />
+
           <MenuItem
             title="Business"
             isActive={activeMenu === "Business"}
@@ -135,10 +145,18 @@ const Sidebar = () => {
             ]}
           />
           <MenuItem
-            title="Lab"
+            title="Lab Database"
             isActive={activeMenu === "Lab"}
             toggleMenu={() => toggleMenu("Lab")}
             subMenu={[
+              {
+                label: "All Categories",
+                actions: () => handleListSelect("testCategories"),
+              },
+              {
+                label: "All Tests",
+                actions: () => handleListSelect("tests"),
+              },
               {
                 label: "Add Test Category",
                 actions: () => handleFormModalSection("testCategory"),
@@ -166,7 +184,7 @@ const Sidebar = () => {
           />
 
           <MenuItem
-            title="Manage"
+            title="Manage Employees"
             isActive={activeMenu === "Manage"}
             toggleMenu={() => toggleMenu("Manage")}
             subMenu={[
