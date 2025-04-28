@@ -1,8 +1,10 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import { DotLoader } from 'react-spinners'
 import CenterList from './Pages/CenterList'
+import { useDispatch } from 'react-redux'
+import { getPatientById } from './redux/slices/adminActionSlice'
 
 // Lazy load components
 const Login = lazy(() => import('./Pages/useraccount/Login'))

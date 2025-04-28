@@ -92,7 +92,9 @@ const formReducer = (state, action) => {
 // Add Doctor
 
 export const handleAddDoctor = async (data, setDisplayModal, setLoader) => {
-    const centerId= store.getState().auth.user.center;
+    debugger
+    // const centerId= store.getState().auth.user.center;
+    const centerId = "680e1f8ea38b89f4ce548730";
     const payload = structuredClone(data);
     payload.centerId = centerId;
     console.log("data for adding doctor", payload);
@@ -189,8 +191,8 @@ export const handleAddCase = async(data, onClose,navigate, setLoader) =>{
         return toast.error("Error adding Case");
     } else {
         onClose();
+        toast.success("Case has been successfully added");
         navigate(`/case-details/${res?.patient?._id}`,{state:{patient:res?.patient}})
-        return toast.success("Case has been successfully added");
     }
 }   
 

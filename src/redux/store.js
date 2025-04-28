@@ -20,6 +20,7 @@ import storage from "redux-persist/lib/storage"; // Uses localStorage by default
 import authReducer from "./slices/authSlice";
 import doctorReducer from "./slices/doctorSlice";
 import getDropDownSlice from './slices/getDropdownoptionSlice'
+import adminAction from "./slices/adminActionSlice";
 
 
 const persistConfig = {
@@ -31,7 +32,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: authReducer,
   doctor:doctorReducer,
-  dropDownOptions: getDropDownSlice
+  dropDownOptions: getDropDownSlice,
+  adminAction:adminAction
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -21,16 +21,26 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
     address: '',
     patientHistory: '',
     onlineReport: [],
-    referredBy: '',
-    collectionCenter: '',
-    sampleCollectedBy: '',
-    isOutsourceLab: false,
-    recommendedTests: [],
     paid: '',
     discount: '',
     balance: '',
     mode: '',
     remark: '',
+    caseDetails: {
+      referredBy: '',
+      collectionCenter: '',
+      sampleCollectedBy: '',
+      isOutsourceLab: false,
+      recommendedTests: [],
+    },
+    paymentDetails: {
+      total:"",
+      discount:"",
+      amountReceived:"",
+      balance:"",
+      mode:"",
+      remark:""
+    }
   });
 
   const handleInputChange = (field, value) => {
@@ -38,6 +48,24 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
       ...prev,
       [field]: value,
     }));
+  };
+
+  const handleCaseDetailsChange = (field, value) => {
+    debugger
+    setFormData((prev) => ({
+      ...prev,
+      caseDetails:{...prev.caseDetails,[field]: value},
+    }));
+    console.log("caseDetails", formData)
+  };
+
+  const handlePaymentDetailsChange = (field, value) => {
+    debugger
+    setFormData((prev) => ({
+      ...prev,
+      paymentDetails:{...prev.paymentDetails,[field]: value},
+    }));
+    console.log("paymentDetails", formData)
   };
 
   const handleSubmit = () => {
@@ -64,11 +92,11 @@ const AddNewCaseModal = ({ isOpen, onClose }) => {
         
         <Accordian title="Case Details">
         {/* Case Details Section */}
-        <CaseDetails formData={formData} onInputChange={handleInputChange} setFormData = {setFormData}/>
+        <CaseDetails formData={formData.caseDetails} onInputChange={handleCaseDetailsChange} setFormData = {setFormData}/>
         </Accordian>
         <Accordian title="Payment Details">
         {/* payment details*/}
-          <PaymentDetail formData = {formData} onInputChange =  {handleInputChange}/>
+          <PaymentDetail formData = {formData.paymentDetails} onInputChange =  {handlePaymentDetailsChange}/>
         </Accordian>
         {/* Footer Buttons */}
         <footer className="flex justify-start mt-6">          

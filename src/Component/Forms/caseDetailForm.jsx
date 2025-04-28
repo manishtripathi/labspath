@@ -8,13 +8,22 @@ import { FiDownload, FiShare2, FiUploadCloud } from "react-icons/fi";
 import { EmailShareButton, LinkedinShareButton, WhatsappShareButton } from "react-share";
 import { FaWhatsapp, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import html2pdf from "html2pdf.js";
+import { useDispatch, useSelector } from "react-redux";
+import { DotLoader } from "react-spinners";
+import { getPatientById } from "../../redux/slices/adminActionSlice";
 
 function CaseDetailForm() {
-  const { id } = useParams();
+  const { id } = useParams(); //this is patient id
   const patient = useLocation()?.state?.patient
   const pdfRef = useRef();
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [pdfUrl, setPdfUrl] = useState("");
+  debugger
+  const {PatientDetail} = useSelector((state) => state.adminAction);
+const dispatch = useDispatch();
+useEffect(()=>{
+  dispatch(getPatientById(id));
+},[dispatch])
   const handlePrint = () => {
     const printWindow = window.open("", "_blank", "width=600,height=800");
 
@@ -112,6 +121,18 @@ function CaseDetailForm() {
         console.error("Error generating PDF:", error);
       });
   };
+
+  if(PatientDetail.loading) {
+    return (<div className='loading-route'><DotLoader
+      color="#30cdac"
+      size={100}
+    /></div>)
+  }
+  if (PatientDetail.error) {
+    return <div className="flex justify-center items-center h-screen">
+      <h1 className="text-red-500">Error fetching patient details</h1>
+    </div>
+  }
   
 
   return (
