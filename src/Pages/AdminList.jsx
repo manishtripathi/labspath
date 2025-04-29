@@ -46,43 +46,10 @@ export default function AdminList() {
   );
 
   const columns = [
-    { key: "name", label: "Center Name", filterable: true },
-    { key: "location", label: "Location", filterable: true },
-    {
-      key: "admins",
-      label: "Admins",
-      renderCell: (row) => renderViewButton("Admins", row.admins),
-    },
-    {
-      key: "doctors",
-      label: "Doctors",
-      renderCell: (row) => renderViewButton("Doctors", row.doctors),
-    },
-    {
-      key: "technicians",
-      label: "Technicians",
-      renderCell: (row) => renderViewButton("Technicians", row.technicians),
-    },
-    {
-      key: "patients",
-      label: "Patients",
-      renderCell: (row) => renderViewButton("Patients", row.patients),
-    },
-    {
-        key: "testCategories",
-        label: "Test Categories",
-        renderCell: (row) => renderViewButton("categories",row.testCategories),
-        // renderCell: (row) => renderList(row.testCategories),
-      },
-    {
-      key: "status",
-      label: "Status",
-      renderCell: (row) => (
-        <span className={row.isActive ? "text-green-600" : "text-red-600"}>
-          {row.isActive ? "Active" : "Inactive"}
-        </span>
-      ),
-    },
+    { key: "name", label: " Name", filterable: true },
+    { key: "email", label: "Email", filterable: true },
+    { key : "createdAt", label: "Created At", filterable: true },
+    { key: "center", label: "Center", filterable: true, renderCell: (row) => row.center.name },
   ];
 
   const actions = [
