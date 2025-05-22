@@ -5,6 +5,7 @@ import { DotLoader } from 'react-spinners'
 import CenterList from './Pages/CenterList'
 import { useDispatch } from 'react-redux'
 import { getPatientById } from './redux/slices/adminActionSlice'
+import ProtectedRoute from './Component/ProtectedRoute'
 
 // Lazy load components
 const Login = lazy(() => import('./Pages/useraccount/Login'))
@@ -23,12 +24,20 @@ function App() {
       /></div>}>
         <Routes>
           <Route path='/' element={<Login />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          {/* <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/table' element={<Tablepagination />} />
           <Route path='/list/:listName' element={<TableList />} />
           <Route path='/centers' element={<CenterList />} />
           <Route path='/test-table' element={<TestfoematTable />} />
-          <Route path='/case-details/:id' element={<CaseDetailForm />} />
+          <Route path='/case-details/:id' element={<CaseDetailForm />} /> */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/table" element={<Tablepagination />} />
+            <Route path="/list/:listName" element={<TableList />} />
+            <Route path="/centers" element={<CenterList />} />
+            <Route path="/test-table" element={<TestfoematTable />} />
+            <Route path="/case-details/:id" element={<CaseDetailForm />} />
+          </Route>
         </Routes>
       </Suspense>
     </>

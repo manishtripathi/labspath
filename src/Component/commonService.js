@@ -38,6 +38,7 @@ const handleLoginAsDoctor = (data, dispatch, navigate, setLoader) => {
         dispatch(loginAsAdmin(data)),messages)
         .then((res) => {
             if (res?.payload?.token) {
+                localStorage.setItem("token", res?.payload?.token);
                 toast.success(res?.payload?.message || "Successfull login")
                 navigate("/dashboard");
             } else {
