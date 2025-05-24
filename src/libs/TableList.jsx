@@ -18,7 +18,7 @@ const TableList = ({tabledata}) => {
     //         <button onClick={() => alert(`Delete ${row.name}`)}>Delete</button>
     //     </div>
     // );
-     
+     debugger
     const {listName} = useTableList(tabledata);
     return (
         <MainLayout>
@@ -27,7 +27,7 @@ const TableList = ({tabledata}) => {
                 listName === "doctors" ? <DoctorList /> :
                 listName === "admins" ? <AdminList/> :
                 listName === "cases" ? <CaseList/> :
-                listName === "testcategory" ? <TestCategoryList/> :
+                listName === "testCategories" ? <TestCategoryList/> :
                 listName === "tests" ? <TestList/> :
                 <div>
                     <h1>List Not Found</h1>

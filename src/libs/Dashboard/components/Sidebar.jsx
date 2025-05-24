@@ -45,6 +45,9 @@ const Sidebar = () => {
       console.log(data);
       handleAddcenter(data, setDisplayModal, token);
     } else if (activeModal === "testCategory") {
+      console.log(data);
+      
+      debugger
       handleAddTestCategory(data, setDisplayModal, navigate);
     } else if (activeModal === "tests") {
       handleAddTest(data, setDisplayModal, navigate);

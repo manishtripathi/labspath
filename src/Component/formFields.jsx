@@ -56,11 +56,13 @@ export const AddTestCategory = () => {
 
     return [
         { name: "name", type: "text", label: "Name", rules: [{ required: true }] },
-        { 
-            name: "centerId", type: "select", label: "Center",
-            options: allCenters.map(center => ({ value: center._id, label: center.name })), 
-            rules: [{ required: true }]
-        }
+       { 
+    name: "centerId", 
+    type: "select", 
+    label: "Center",
+    options: allCenters.map(center => ({ value: center._id, label: center.name })), 
+    rules: [{ required: true }]
+}
     ];
 }
 

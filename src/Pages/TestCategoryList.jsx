@@ -9,6 +9,7 @@ import { getAlltestCategorylst } from "../redux/slices/getDropdownoptionSlice";
 
 export default function TestCategoryList() {
   const dispatch = useDispatch();
+  debugger
   const { allTestCategory } = useSelector((state) => state.dropDownOptions);
   
   const [showModal, setShowModal] = useState(false);

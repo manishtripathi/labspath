@@ -154,9 +154,9 @@ export const handleAddAdmin = async (data, setDisplayModal, setLoader) => {
 
 
 export const handleAddTestCategory = async(data, setDisplayModal, setLoader) =>{
-    const centerId= store.getState().auth.user.center;
+    // const centerId= store.getState().auth.user.center;
     const payload = structuredClone(data);
-    payload.centerId = centerId;
+    // payload.centerId = centerId;
     console.log("payload->",payload)
     const res = await addTestCategory(payload);
 
